@@ -1,0 +1,51 @@
+@keyframes fadeIn {
+	0%   {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+@keyframes fromTop {
+	0%   {transform: translate(0, -1536px);}
+	100% {transform: translate(0, 0);}
+}
+
+@keyframes fromRight {
+	0%   {transform: translate(-1536px, 0);}
+	100% {transform: translate(0, 0);}
+}
+
+@keyframes fromBottom {
+	0%   {transform: translate(0, 1536px);}
+	100% {transform: translate(0, 0);}
+}
+
+@keyframes fromLeft {
+	0%   {transform: translate(1536px, 0);}
+	100% {transform: translate(0, 0);}
+}
+
+@keyframes fromTopRight {
+	0%   {transform: translate(-1536px, -1536px);}
+	100% {transform: translate(0, 0);}
+}
+
+@keyframes fromBottomRight {
+	0%   {transform: translate(-1536px, 1536px);}
+	100% {transform: translate(0, 0);}
+}
+
+.logo {
+	$easing: cubic-bezier(0.000, 0.000, 0.128, 1.280);
+
+	.g0 {animation: fadeIn          0.5s $easing;}
+	.l0 {animation: fromRight       0.8s $easing;}
+	.l1 {animation: fromLeft        0.8s $easing;}
+	.Z0 {animation: fromBottomRight 0.6s $easing;}
+	.N0 {animation: fromBottom      0.7s $easing;}
+	.N1 {animation: fromTopRight    0.8s $easing;}
+	.N2 {animation: fromTop         0.9s $easing;}
+	.T0 {animation: fromBottom      1.0s $easing;}
+
+	.g0, .l0, .l1, .Z0, .N0, .N1, .N2, .T0 {
+		animation-fill-mode: forwards;
+	}
+}

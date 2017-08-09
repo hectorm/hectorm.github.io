@@ -1,0 +1,214 @@
+@charset "utf-8";
+
+$color0: #f5f5f5;
+$color1: #fafafa;
+$color2: #0097a7;
+$color3: #424242;
+
+@import 'em';
+@import 'fonts';
+@import 'shadows';
+@import 'box-sizing';
+@import 'animations';
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	font-family: $system-sans-serif;
+	font-size: $em-base-px;
+	font-weight: 400;
+	color: $color3;
+	background-color: $color0;
+}
+
+.nodegarden {
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.card {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	background-color: $color1;
+	border-radius: rem(3);
+
+	@include shadow-elevation-4dp();
+
+	.logo {
+		padding: rem(10);
+		height: rem(200);
+		width: rem(200);
+		background-color: $color2;
+		border-radius: rem(3) 0 0 rem(3);
+
+		line {
+			stroke: $color1;
+		}
+	}
+
+	.description {
+		padding: rem(20);
+		text-align: center;
+	}
+}
+
+h1.title {
+	font-size: rem(30);
+	font-weight: 400;
+}
+
+h2.title {
+	font-size: rem(20);
+	font-weight: 300;
+}
+
+h1, h2 {
+	&.title {
+		margin: 0 0 rem(15);
+	}
+}
+
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	stroke-width: 0;
+	stroke: currentColor;
+	fill: currentColor;
+}
+
+.btn {
+	display: inline-block;
+	margin: rem(8);
+	padding: 0 rem(15);
+	min-width: rem(110);
+	min-height: rem(35);
+	line-height: rem(35);
+	font-size: rem(14);
+	font-weight: 400;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: $color1;
+	background-color: $color2;
+	cursor: pointer;
+	border-radius: rem(3);
+
+	@include shadow-elevation-4dp();
+
+	&:hover, &:focus {
+		background-color: darken($color2, 5%);
+	}
+
+	&:active {
+		background-color: darken($color2, 10%);
+	}
+
+	.icon {
+		margin-top: rem(-3);
+		margin-right: rem(5);
+		vertical-align: middle;
+	}
+
+	.text {
+		display: inline-block;
+		min-width: rem(60);
+	}
+}
+
+@media print, (max-width: 768px) {
+	body {
+		justify-content: flex-start;
+	}
+
+	.card {
+		align-items: flex-start;
+		width: 100%;
+		height: 100vh;
+		border-radius: 0;
+		background-color: transparent;
+
+		@include shadow-none();
+
+		.logo {
+			width: 100%;
+			height: 30%;
+			min-height: rem(128);
+			max-height: rem(256);
+			border-radius: 0;
+
+			@include shadow-elevation-4dp();
+		}
+
+		.description {
+			width: 100%;
+		}
+	}
+
+	.btn {
+		width: 40%;
+		min-height: rem(40);
+		line-height: rem(40);
+	}
+
+	.nodegarden {
+		display: none;
+	}
+}
+
+@media print {
+	body, .card, .btn {
+		color: #000 !important;
+		background-color: #fff !important;
+	}
+
+	.card > .logo {
+		display: none;
+	}
+
+	.btn {
+		display: block;
+		width: auto;
+		text-align: left;
+
+		@include shadow-none();
+
+		.icon {
+			margin-right: rem(10);
+		}
+
+		&::after {
+			margin-left: rem(10);
+			font-weight: 300;
+			text-transform: none;
+		}
+
+		&.btn-github::after {
+			content: '@zant95';
+		}
+
+		&.btn-gitlab::after {
+			content: '@zant95';
+		}
+
+		&.btn-email::after {
+			content: 'hector (at) molinero (dot) xyz';
+		}
+
+		&.btn-key::after {
+			content: 'https://molinero.xyz/key.asc';
+		}
+	}
+}
