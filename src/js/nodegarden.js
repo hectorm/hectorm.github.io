@@ -95,20 +95,25 @@ export class NodeGarden {
 		mouseNode.x = Number.MAX_SAFE_INTEGER;
 		mouseNode.y = Number.MAX_SAFE_INTEGER;
 
-		window.addEventListener('mousedown', () => {
+		container.addEventListener('mousedown', event => {
+			let element = document.elementFromPoint(event.clientX, event.clientY);
+			if (element === this.container || element === this.canvas) {
+				event.preventDefault();
+			}
+
 			mouseNode.m = 15;
 		});
 
-		window.addEventListener('mouseup', () => {
+		container.addEventListener('mouseup', () => {
 			mouseNode.m = 0;
 		});
 
-		document.addEventListener('mousemove', event => {
+		container.addEventListener('mousemove', event => {
 			mouseNode.x = event.pageX * pixelRatio;
 			mouseNode.y = event.pageY * pixelRatio;
 		});
 
-		document.documentElement.addEventListener('mouseleave', () => {
+		container.addEventListener('mouseleave', () => {
 			mouseNode.x = Number.MAX_SAFE_INTEGER;
 			mouseNode.y = Number.MAX_SAFE_INTEGER;
 		});
