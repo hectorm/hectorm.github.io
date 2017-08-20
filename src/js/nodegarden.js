@@ -179,9 +179,7 @@ export class NodeGarden {
 
 				// Draw gravity lines
 				this.ctx.beginPath();
-
 				this.ctx.strokeStyle = `rgba(158,158,158,${opacity < 1 ? opacity : 1})`;
-
 				this.ctx.moveTo(nodeA.x, nodeA.y);
 				this.ctx.lineTo(nodeB.x, nodeB.y);
 				this.ctx.stroke();
