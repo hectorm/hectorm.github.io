@@ -8,6 +8,27 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+
+const browsers = [
+	'Last 2 Chrome versions',
+	'Firefox ESR',
+	'Explorer 11'
+];
+
+const babelLoaderOptions = {
+	cacheDirectory: true,
+	presets: [['env', {targets: {browsers}}]]
+};
+
+const postCSSLoaderOptions = {
+	plugins: [
+		autoprefixer({browsers}),
+		cssnano({discardComments: {removeAll: true}})
+	]
+};
+
 module.exports = {
 	entry: path.join(__dirname, 'src/js/main.js'),
 	output: {
@@ -18,11 +39,10 @@ module.exports = {
 		new ExtractTextWebpackPlugin('bundle.css'),
 		new UglifyJSPlugin({
 			uglifyOptions: {
+				mangle: true,
 				compress: true,
 				output: {
-					comments: false,
-					// eslint-disable-next-line camelcase
-					max_line_len: 512
+					comments: false
 				}
 			}
 		}),
@@ -30,14 +50,9 @@ module.exports = {
 			template: path.resolve(__dirname, 'src/index.html'),
 			filename: 'index.html',
 			minify: {
-				maxLineLength: 512,
 				collapseWhitespace: true,
 				collapseInlineTagWhitespace: true,
-				removeComments: true,
-				minifyCSS: {
-					format: {wrapAt: 512},
-					level: {1: {specialComments: 0}}
-				}
+				removeComments: true
 			}
 		}),
 		new StyleExtHtmlWebpackPlugin(),
@@ -51,20 +66,26 @@ module.exports = {
 	],
 	module: {
 		rules: [
-			{test: /\.css$/, loader: ExtractTextWebpackPlugin.extract('css-loader')},
-			{test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract(['css-loader', 'sass-loader'])},
-			{test: /\.js$/, exclude: /node_modules/, use: {
-				loader: 'babel-loader',
-				options: {
-					cacheDirectory: true,
-					presets: [['env', {targets: {
-						browsers: [
-							'Last 2 Chrome versions',
-							'Firefox ESR'
-						]}
-					}]]
-				}
-			}}
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {loader: 'babel-loader', options: babelLoaderOptions}
+			},
+			{
+				test: /\.css$/,
+				loader: ExtractTextWebpackPlugin.extract([
+					'css-loader',
+					{loader: 'postcss-loader', options: postCSSLoaderOptions}
+				])
+			},
+			{
+				test: /\.scss$/,
+				loader: ExtractTextWebpackPlugin.extract([
+					'css-loader',
+					{loader: 'postcss-loader', options: postCSSLoaderOptions},
+					'sass-loader'
+				])
+			}
 		]
 	},
 	devServer: {
