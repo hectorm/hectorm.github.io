@@ -59,7 +59,6 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{from: 'src/manifest.json'},
 			{from: 'src/key.asc'},
-			{from: 'src/keybase.txt'},
 			{from: 'src/robots.txt'},
 			{from: 'src/img', to: 'img'}
 		], {ignore: ['.gitkeep']})
