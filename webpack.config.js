@@ -57,10 +57,12 @@ module.exports = {
 		}),
 		new StyleExtHtmlWebpackPlugin(),
 		new CopyWebpackPlugin([
-			{from: 'src/manifest.json'},
+			{from: 'src/dat.json'},
 			{from: 'src/key.asc'},
+			{from: 'src/manifest.json'},
 			{from: 'src/robots.txt'},
-			{from: 'src/img', to: 'img'}
+			{from: 'src/.well-known/', to: '.well-known/'},
+			{from: 'src/img/', to: 'img/'}
 		], {ignore: ['.gitkeep']})
 	],
 	module: {
