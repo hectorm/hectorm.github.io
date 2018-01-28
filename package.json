@@ -23,9 +23,9 @@
     "babel-loader": "~7.1.2",
     "babel-preset-env": "~1.6.1",
     "copy-webpack-plugin": "~4.3.1",
-    "css-loader": "~0.28.8",
+    "css-loader": "~0.28.9",
     "cssnano": "~3.10.0",
-    "eslint": "~4.15.0",
+    "eslint": "~4.16.0",
     "eslint-config-xo": "~0.19.0",
     "eslint-config-zant": "~2.0.0",
     "eslint-plugin-import": "~2.8.0",
@@ -37,9 +37,9 @@
     "postcss-loader": "~2.0.10",
     "rimraf": "~2.6.2",
     "sass-loader": "~6.0.6",
-    "style-ext-html-webpack-plugin": "~3.4.6",
+    "style-ext-html-webpack-plugin": "~3.4.7",
     "uglifyjs-webpack-plugin": "~1.1.6",
     "webpack": "~3.10.0",
-    "webpack-dev-server": "~2.10.1"
+    "webpack-dev-server": "~2.11.1"
   }
 }
