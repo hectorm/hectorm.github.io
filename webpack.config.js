@@ -32,7 +32,7 @@ const postCSSLoaderOptions = {
 module.exports = {
 	entry: path.join(__dirname, 'src/js/main.js'),
 	output: {
-		path: path.join(__dirname, 'dist'),
+		path: path.join(__dirname, 'public'),
 		filename: 'bundle.js'
 	},
 	plugins: [
@@ -88,7 +88,7 @@ module.exports = {
 		]
 	},
 	devServer: {
-		contentBase: path.join(__dirname, 'dist'),
+		contentBase: path.join(__dirname, 'public'),
 		host: '0.0.0.0',
 		port: 9000,
 		disableHostCheck: true,

@@ -12,7 +12,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "clean": "rimraf ./dist/**",
+    "clean": "rimraf ./public/**",
     "build": "npm run clean && webpack --display-reasons",
     "serve": "webpack-dev-server"
   },
