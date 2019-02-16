@@ -46,7 +46,7 @@ export class Node {
 	distanceTo(node) {
 		let x = node.x - this.x;
 		let y = node.y - this.y;
-		let total = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+		let total = Math.sqrt((x ** 2) + (y ** 2));
 
 		return {x, y, total};
 	}
@@ -121,7 +121,7 @@ export class NodeGarden {
 		this.nodes.unshift(mouseNode);
 
 		this.resize();
-		this.container.appendChild(this.canvas);
+		this.container.append(this.canvas);
 	}
 
 	render(start) {
