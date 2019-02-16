@@ -1,6 +1,6 @@
 import {NodeGarden, pixelRatio} from './nodegarden.js';
-import {} from 'normalize.css';
-import {} from '../scss/main.scss';
+import 'normalize.css';
+import '../scss/main.scss';
 
 window.addEventListener('load', () => {
 	// Deobfuscate email address

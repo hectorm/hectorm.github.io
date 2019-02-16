@@ -44,7 +44,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	height: rem(200);
+	height: rem(230);
 	background-color: $color1;
 	border-radius: rem(3);
 
@@ -52,8 +52,8 @@ body {
 
 	.logo {
 		padding: rem(10);
-		height: rem(200);
-		width: rem(200);
+		height: rem(230);
+		width: rem(230);
 		background-color: $color2;
 		border-radius: rem(3) 0 0 rem(3);
 
@@ -64,6 +64,7 @@ body {
 
 	.description {
 		padding: rem(20);
+		max-width: rem(500);
 		text-align: center;
 	}
 }
@@ -98,8 +99,8 @@ h1, h2 {
 	margin: rem(8);
 	padding: 0 rem(15);
 	min-width: rem(110);
-	min-height: rem(35);
-	line-height: rem(35);
+	min-height: rem(30);
+	line-height: rem(30);
 	font-size: rem(14);
 	font-weight: 400;
 	text-align: center;
@@ -110,7 +111,7 @@ h1, h2 {
 	cursor: pointer;
 	border-radius: rem(3);
 
-	@include shadow-elevation-4dp;
+	@include shadow-elevation-2dp;
 
 	&:hover, &:focus {
 		background-color: darken($color2, 5%);
@@ -163,8 +164,8 @@ h1, h2 {
 
 	.btn {
 		width: 40%;
-		min-height: rem(40);
-		line-height: rem(40);
+		min-height: rem(35);
+		line-height: rem(35);
 	}
 
 	.nodegarden {
@@ -205,6 +206,10 @@ h1, h2 {
 
 		&.btn-gitlab::after {
 			content: '@hectorm';
+		}
+
+		&.btn-docker::after {
+			content: '@hectormolinero';
 		}
 
 		&.btn-email::after {
