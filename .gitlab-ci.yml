@@ -1,0 +1,30 @@
+image: node:10-stretch
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - npm run lint
+    - npm run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist/
+  cache:
+    paths:
+      - node_modules/
+
+pages:
+  stage: deploy
+  script:
+    - cp -r dist/prod/ public/
+  artifacts:
+    paths:
+      - public/
+  only:
+    - master
