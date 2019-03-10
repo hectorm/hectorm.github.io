@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "hector.molinero.xyz",
+  "name": "hector.molinero.dev",
   "version": "1.0.0",
-  "author": "Héctor Molinero Fernández <hector@molinero.xyz>",
+  "author": "Héctor Molinero Fernández <hector@molinero.dev>",
   "license": "MIT",
-  "homepage": "https://hector.molinero.xyz",
+  "homepage": "https://hector.molinero.dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/hectorm/hectorm.github.io.git"
