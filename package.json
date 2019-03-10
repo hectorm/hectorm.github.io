@@ -10,11 +10,11 @@
     "url": "https://github.com/hectorm/hectorm.github.io.git"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "npm run build:dev && npm run build:prod",
+    "build": "npm run build:dev",
     "build:dev": "webpack --display-reasons",
     "build:prod": "webpack --display-reasons --mode=production",
     "watch": "npm run watch:dev",
@@ -25,22 +25,22 @@
     "serve:prod": "webpack-dev-server --mode=production"
   },
   "dependencies": {
-    "normalize.css": "~8.0.0"
+    "normalize.css": "~8.0.1"
   },
   "devDependencies": {
-    "@babel/core": "~7.3.3",
-    "@babel/preset-env": "~7.3.1",
-    "autoprefixer": "~9.4.7",
+    "@babel/core": "~7.3.4",
+    "@babel/preset-env": "~7.3.4",
+    "autoprefixer": "~9.4.10",
     "babel-loader": "~8.0.5",
-    "clean-webpack-plugin": "~1.0.1",
-    "copy-webpack-plugin": "~4.6.0",
-    "css-loader": "~2.1.0",
+    "clean-webpack-plugin": "~2.0.0",
+    "copy-webpack-plugin": "~5.0.0",
+    "css-loader": "~2.1.1",
     "cssnano": "~4.1.10",
     "eslint-config-xo": "~0.26.0",
     "eslint-config-zant": "~2.1.0",
     "eslint-plugin-import": "~2.16.0",
     "eslint-plugin-unicorn": "~7.1.0",
-    "eslint": "~5.14.0",
+    "eslint": "~5.15.1",
     "html-webpack-plugin": "~3.2.0",
     "mini-css-extract-plugin": "~0.5.0",
     "node-sass": "~4.11.0",
@@ -48,10 +48,10 @@
     "sass-loader": "~7.1.0",
     "svg-url-loader": "~2.3.2",
     "svgo-loader": "~2.2.0",
-    "terser-webpack-plugin": "~1.2.2",
+    "terser-webpack-plugin": "~1.2.3",
     "webpack-cli": "~3.2.3",
-    "webpack-dev-server": "~3.1.14",
-    "webpack": "~4.29.4"
+    "webpack-dev-server": "~3.2.1",
+    "webpack": "~4.29.6"
   },
   "babel": {
     "presets": [

@@ -34,7 +34,9 @@ module.exports = (env, argv) => {
 			]
 		},
 		plugins: [
-			new CleanWebpackPlugin([dist]),
+			new CleanWebpackPlugin({
+				cleanOnceBeforeBuildPatterns: [dist]
+			}),
 			new webpack.EnvironmentPlugin({
 				VERSION: pkg.version
 			}),
