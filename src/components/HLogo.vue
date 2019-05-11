@@ -145,42 +145,49 @@ export default {
 }
 
 .logo {
-	$easing: cubic-bezier(0, 0, 0.128, 1.28);
-
 	.a {
 		animation-fill-mode: forwards;
+		animation-timing-function: cubic-bezier(0, 0, 0.128, 1.28);
 	}
 
 	.g0 {
-		animation: fadeIn 0.5s $easing;
+		animation-name: fadeIn;
+		animation-duration: 0.5s;
 	}
 
 	.l0 {
-		animation: fromRight 0.8s $easing;
+		animation-name: fromRight;
+		animation-duration: 0.8s;
 	}
 
 	.l1 {
-		animation: fromLeft 0.8s $easing;
+		animation-name: fromLeft;
+		animation-duration: 0.8s;
 	}
 
 	.Z0 {
-		animation: fromBottomRight 0.6s $easing;
+		animation-name: fromBottomRight;
+		animation-duration: 0.6s;
 	}
 
 	.N0 {
-		animation: fromBottom 0.7s $easing;
+		animation-name: fromBottom;
+		animation-duration: 0.7s;
 	}
 
 	.N1 {
-		animation: fromTopRight 0.8s $easing;
+		animation-name: fromTopRight;
+		animation-duration: 0.8s;
 	}
 
 	.N2 {
-		animation: fromTop 0.9s $easing;
+		animation-name: fromTop;
+		animation-duration: 0.9s;
 	}
 
 	.T0 {
-		animation: fromBottom 1s $easing;
+		animation-name: fromBottom;
+		animation-duration: 1s;
 	}
 }
 </style>
