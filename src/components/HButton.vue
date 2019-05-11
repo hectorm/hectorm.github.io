@@ -52,7 +52,7 @@ export default {
 	justify-content: center;
 
 	margin: rem(8);
-	padding: rem(5) rem(15);
+	padding: rem(8) rem(15);
 	min-width: rem(100);
 	font-size: rem(14);
 	font-weight: 400;
