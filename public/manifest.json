@@ -1,0 +1,16 @@
+{
+  "name": "Héctor Molinero Fernández (@hectorm)",
+  "short_name": "Héctor M.",
+  "description": "I am Héctor Molinero Fernández",
+  "start_url": ".",
+  "display": "browser",
+  "background_color": "#202B38",
+  "theme_color": "#324759",
+  "icons": [
+    { "src": "img/icon-128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "img/icon-144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

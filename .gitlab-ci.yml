@@ -17,30 +17,19 @@ lint:
   script:
     - npm run lint
 
-build:dev:
+build:
   stage: build
   script:
-    - npm run build:dev
+    - npm run build
   artifacts:
     expire_in: 1 hour
     paths:
-      - dist/dev/
-
-build:prod:
-  stage: build
-  script:
-    - npm run build:prod
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - dist/prod/
-  only:
-    - page
+      - dist/
 
 pages:
   stage: deploy
   script:
-    - cp -r dist/prod/ public/
+    - cp -r dist/ public/
   artifacts:
     paths:
       - public/

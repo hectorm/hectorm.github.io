@@ -5,66 +5,29 @@
   "author": "Héctor Molinero Fernández <hector@molinero.dev>",
   "license": "MIT",
   "homepage": "https://hector.molinero.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hectorm/hectorm.github.io.git"
-  },
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "lint": "eslint .",
-    "build": "npm run build:dev",
-    "build:dev": "webpack --display-reasons",
-    "build:prod": "webpack --display-reasons --mode=production",
-    "watch": "npm run watch:dev",
-    "watch:dev": "webpack --display-reasons --watch",
-    "watch:prod": "webpack --display-reasons --watch --mode=production",
-    "serve": "npm run serve:dev",
-    "serve:dev": "webpack-dev-server",
-    "serve:prod": "webpack-dev-server --mode=production"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "normalize.css": "~8.0.1"
+    "@fortawesome/fontawesome-svg-core": "~1.2.18",
+    "@fortawesome/free-brands-svg-icons": "~5.8.2",
+    "@fortawesome/free-regular-svg-icons": "~5.8.2",
+    "@fortawesome/free-solid-svg-icons": "~5.8.2",
+    "@fortawesome/vue-fontawesome": "~0.1.6",
+    "vue": "~2.6.10"
   },
   "devDependencies": {
-    "@babel/core": "~7.3.4",
-    "@babel/preset-env": "~7.3.4",
-    "autoprefixer": "~9.4.10",
-    "babel-loader": "~8.0.5",
-    "clean-webpack-plugin": "~2.0.0",
-    "copy-webpack-plugin": "~5.0.0",
-    "css-loader": "~2.1.1",
-    "cssnano": "~4.1.10",
-    "eslint-config-xo": "~0.26.0",
-    "eslint-config-zant": "~2.1.0",
-    "eslint-plugin-import": "~2.16.0",
-    "eslint-plugin-unicorn": "~7.1.0",
-    "eslint": "~5.15.1",
-    "html-webpack-plugin": "~3.2.0",
-    "mini-css-extract-plugin": "~0.5.0",
-    "node-sass": "~4.11.0",
-    "postcss-loader": "~3.0.0",
+    "@vue/cli-plugin-babel": "~3.7.0",
+    "@vue/cli-plugin-eslint": "~3.7.0",
+    "@vue/cli-service": "~3.7.0",
+    "@vue/eslint-config-prettier": "~4.0.1",
+    "babel-eslint": "~10.0.1",
+    "eslint": "~5.16.0",
+    "eslint-plugin-vue": "~5.2.2",
+    "sass": "~1.20.1",
     "sass-loader": "~7.1.0",
-    "svg-url-loader": "~2.3.2",
-    "svgo-loader": "~2.2.0",
-    "terser-webpack-plugin": "~1.2.3",
-    "webpack-cli": "~3.2.3",
-    "webpack-dev-server": "~3.2.1",
-    "webpack": "~4.29.6"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
-  "browserslist": [
-    "Firefox ESR",
-    "Last 2 Chrome versions",
-    "Last 2 Edge versions",
-    "Last 2 Firefox versions",
-    "Last 2 iOS versions",
-    "Last 2 Opera versions",
-    "Last 2 Safari versions"
-  ]
+    "vue-template-compiler": "~2.6.10"
+  }
 }

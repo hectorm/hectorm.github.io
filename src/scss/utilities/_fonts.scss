@@ -1,0 +1,4 @@
+$system-emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$system-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, $system-emoji !default;
+$system-serif: 'Apple Garamond', Baskerville, Georgia, 'Times New Roman', 'Roboto Slab', 'Droid Serif', Times, 'Source Serif Pro', serif, $system-emoji !default;
+$system-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace, $system-emoji !default;
