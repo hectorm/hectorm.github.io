@@ -54,12 +54,15 @@ export default {
 	margin: rem(8);
 	padding: rem(8) rem(15);
 	min-width: rem(100);
+
 	font-size: rem(14);
 	font-weight: 400;
 	text-align: center;
 	text-decoration: none;
+
 	color: map-get($theme-colors, 'light');
 	background-color: map-get($theme-colors, 'primary');
+
 	border-radius: rem(3);
 
 	@include shadow-elevation-2dp;

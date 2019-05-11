@@ -22,7 +22,6 @@ export default {
 body {
 	margin: 0;
 	height: 100vh;
-	overflow-x: hidden;
 	font-family: $system-sans-serif;
 	font-size: $em-base-px;
 	font-weight: 400;
@@ -32,6 +31,7 @@ body {
 
 .app {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -42,6 +42,13 @@ body {
 	}
 
 	.node-garden {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
 		z-index: 0;
 	}
 }
