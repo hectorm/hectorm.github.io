@@ -6,67 +6,67 @@
 		preserveAspectRatio="xMidYMid meet"
 		class="logo"
 	>
-		<g class="g0">
+		<g class="a g0">
 			<line
-				class="l0"
-				x1="032"
-				y1="384"
-				x2="992"
-				y2="384"
+				class="a l0"
+				x1="032.00px"
+				y1="384.00px"
+				x2="992.00px"
+				y2="384.00px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="l1"
-				x1="032"
-				y1="640"
-				x2="992"
-				y2="640"
+				class="a l1"
+				x1="032.00px"
+				y1="640.00px"
+				x2="992.00px"
+				y2="640.00px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="Z0"
-				x1="044.85"
-				y1="635.33"
-				x2="339.15"
-				y2="388.66"
+				class="a Z0"
+				x1="044.85px"
+				y1="635.33px"
+				x2="339.15px"
+				y2="388.66px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="N0"
-				x1="372"
-				y1="384"
-				x2="372"
-				y2="640"
+				class="a N0"
+				x1="372.00px"
+				y1="384.00px"
+				x2="372.00px"
+				y2="640.00px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="N1"
-				x1="387.85"
-				y1="388.15"
-				x2="636.15"
-				y2="635.85"
+				class="a N1"
+				x1="387.85px"
+				y1="388.15px"
+				x2="636.15px"
+				y2="635.85px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="N2"
-				x1="652"
-				y1="384"
-				x2="652"
-				y2="640"
+				class="a N2"
+				x1="652.00px"
+				y1="384.00px"
+				x2="652.00px"
+				y2="640.00px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
 			<line
-				class="T0"
-				x1="832"
-				y1="640"
-				x2="832"
-				y2="384"
+				class="a T0"
+				x1="832.00px"
+				y1="640.00px"
+				x2="832.00px"
+				y2="384.00px"
 				stroke="currentColor"
 				stroke-width="40px"
 			/>
@@ -146,6 +146,10 @@ export default {
 
 .logo {
 	$easing: cubic-bezier(0, 0, 0.128, 1.28);
+
+	.a {
+		animation-fill-mode: forwards;
+	}
 
 	.g0 {
 		animation: fadeIn 0.5s $easing;
