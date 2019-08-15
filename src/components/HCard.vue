@@ -35,6 +35,12 @@
 				link="key.asc"
 				:icon="['fas', 'key']"
 			/>
+			<h-button
+				class="button pointer"
+				text="Donate"
+				link="https://www.paypal.me/hectormf"
+				:icon="['fas', 'heart']"
+			/>
 		</div>
 	</div>
 </template>

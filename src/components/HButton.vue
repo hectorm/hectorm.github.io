@@ -53,7 +53,7 @@ export default {
 
 	margin: rem(8);
 	padding: rem(8) rem(15);
-	min-width: rem(100);
+	min-width: rem(120);
 
 	font-size: rem(14);
 	font-weight: 400;
