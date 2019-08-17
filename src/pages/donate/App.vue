@@ -1,22 +1,22 @@
 <template>
 	<div class="app">
 		<form class="form" v-on:submit.prevent="onSubmit">
-			<h1>Donate to Héctor Molinero Fernández</h1>
-			<p>
+			<h1 class="form-title">Donate to Héctor Molinero Fernández</h1>
+			<p class="form-paragraph">
 				Thanks for your interest in supporting my work! Your donation here
 				supports my open source projects on
 				<a href="https://github.com/hectorm">GitHub</a> and
 				<a href="https://gitlab.com/hectorm">GitLab</a>.
 			</p>
-			<p>
+			<p class="form-paragraph">
 				Donations are securely processed through
 				<a href="https://stripe.com">Stripe</a>, and your payment information is
 				not stored on my servers.
 			</p>
 			<div class="form-controls">
 				<select
+					class="form-element form-element-currency"
 					v-model="skuId"
-					class="form-element stripe-sku-id"
 					aria-label="Currency"
 				>
 					<option v-for="sku in skus" :key="sku.id" :value="sku.id">
@@ -24,35 +24,33 @@
 					</option>
 				</select>
 				<input
+					class="form-element form-element-amount"
 					v-model.number="skuQuantity"
-					class="form-element stripe-sku-quantity"
 					type="number"
 					step="1"
 					min="1"
 					placeholder="Amount"
 					aria-label="Amount"
 				/>
-				<button class="form-element stripe-submit" type="submit">
+				<button
+					class="form-element form-element-submit"
+					type="submit"
+					aria-label="Donate"
+				>
 					<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
 					<span class="text">Donate</span>
 				</button>
-				<p class="stripe-error" v-if="errorMessage.length > 0">
-					<strong>Error:</strong> {{ errorMessage }}
-				</p>
 			</div>
+			<p class="form-paragraph" v-if="errorMessage.length > 0">
+				<strong>Error:</strong> {{ errorMessage }}
+			</p>
 		</form>
-		<node-garden class="node-garden" />
 	</div>
 </template>
 
 <script>
-import NodeGarden from '@/components/NodeGarden.vue';
-
 export default {
 	name: 'App',
-	components: {
-		NodeGarden
-	},
 	data() {
 		return {
 			stripe: null,
@@ -90,7 +88,11 @@ export default {
 		};
 	},
 	created() {
-		this.stripe = Stripe(this.publishableKey);
+		try {
+			this.stripe = Stripe(this.publishableKey);
+		} catch (error) {
+			this.errorMessage = error.message;
+		}
 	},
 	methods: {
 		async onSubmit() {
@@ -133,13 +135,21 @@ body {
 		max-width: rem(768);
 		z-index: 1;
 
-		.form-controls {
-			padding: rem(20);
-			text-align: center;
+		.form-title,
+		.form-paragraph {
+			margin-top: 0;
+		}
+
+		.form-title {
+			margin-bottom: rem(30);
+		}
+
+		.form-paragraph {
+			margin-bottom: rem(20);
 		}
 
 		.form-element {
-			margin: rem(20);
+			margin: 0 rem(20) rem(20) 0;
 			padding: rem(8) rem(15);
 			height: rem(40);
 
@@ -161,16 +171,15 @@ body {
 				background-color: darken(map-get($theme-colors, 'light'), 10%);
 			}
 
-			&.stripe-sku-id {
-				margin: 0;
+			&.form-element-currency {
+				margin-right: 0;
 				width: rem(100);
 				border-radius: rem(3) 0 0 rem(3);
 				cursor: pointer;
 				appearance: none;
 			}
 
-			&.stripe-sku-quantity {
-				margin: 0;
+			&.form-element-amount {
 				width: rem(100);
 				text-align: right;
 				border-radius: 0 rem(3) rem(3) 0;
@@ -181,7 +190,7 @@ body {
 				}
 			}
 
-			&.stripe-submit {
+			&.form-element-submit {
 				cursor: pointer;
 				appearance: none;
 			}
