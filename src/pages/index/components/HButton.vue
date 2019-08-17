@@ -63,6 +63,7 @@ export default {
 	color: map-get($theme-colors, 'light');
 	background-color: map-get($theme-colors, 'primary');
 
+	border: 0;
 	border-radius: rem(3);
 
 	@include shadow-elevation-2dp;

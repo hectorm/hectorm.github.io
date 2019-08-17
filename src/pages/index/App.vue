@@ -1,19 +1,19 @@
 <template>
 	<div class="app">
 		<h-card class="card" />
-		<h-node-garden class="node-garden" />
+		<node-garden class="node-garden" />
 	</div>
 </template>
 
 <script>
-import HCard from '@/components/HCard.vue';
-import HNodeGarden from '@/components/HNodeGarden.vue';
+import NodeGarden from '@/components/NodeGarden.vue';
+import HCard from './components/HCard.vue';
 
 export default {
 	name: 'App',
 	components: {
-		HCard,
-		HNodeGarden
+		NodeGarden,
+		HCard
 	}
 };
 </script>

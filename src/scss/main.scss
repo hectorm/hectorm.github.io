@@ -7,3 +7,8 @@ html {
 *, *:before, *:after {
 	box-sizing: inherit;
 }
+
+a {
+	color: map-get($theme-colors, 'light');
+	text-decoration: underline;
+}

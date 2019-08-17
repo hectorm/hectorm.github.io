@@ -1,8 +1,8 @@
 import Vue from 'vue';
 
-import '@/scss/main.scss';
-
 import '@/vendor/fontawesome';
+
+import './scss/main.scss';
 
 import App from './App.vue';
 

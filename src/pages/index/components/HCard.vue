@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import HButton from '@/components/HButton.vue';
-import HLogo from '@/components/HLogo.vue';
+import HButton from './HButton.vue';
+import HLogo from './HLogo.vue';
 
 export default {
-	name: 'Card',
+	name: 'HCard',
 	components: {
 		HButton,
 		HLogo
