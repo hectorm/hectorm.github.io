@@ -1,7 +1,10 @@
 <template>
 	<div class="app">
-		<form class="form" v-on:submit.prevent="onSubmit">
-			<h1 class="form-title">Donate to Héctor Molinero Fernández</h1>
+		<form class="form" ref="form" @submit.prevent>
+			<h1 class="form-title">
+				Donate to
+				<a href="https://hector.molinero.dev">Héctor Molinero Fernández</a>
+			</h1>
 			<p class="form-paragraph">
 				Thanks for your interest in supporting my work! Your donation here
 				supports my open source projects on
@@ -10,22 +13,27 @@
 			</p>
 			<p class="form-paragraph">
 				Donations are securely processed through
-				<a href="https://stripe.com">Stripe</a>, and your payment information is
+				<a href="https://stripe.com">Stripe</a> or
+				<a href="https://paypal.com">PayPal</a>, and your payment information is
 				not stored on my servers.
 			</p>
 			<div class="form-controls">
 				<select
 					class="form-element form-element-currency"
-					v-model="skuId"
+					v-model="currency"
 					aria-label="Currency"
 				>
-					<option v-for="sku in skus" :key="sku.id" :value="sku.id">
-						{{ sku.name }}&nbsp;&nbsp;&nbsp;{{ sku.sign }}
+					<option
+						v-for="({ symbol }, name) in currencies"
+						:key="name"
+						:value="name"
+					>
+						{{ name }}&nbsp;&nbsp;&nbsp;{{ symbol }}
 					</option>
 				</select>
 				<input
 					class="form-element form-element-amount"
-					v-model.number="skuQuantity"
+					v-model.number="amount"
 					type="number"
 					step="1"
 					min="1"
@@ -33,12 +41,22 @@
 					aria-label="Amount"
 				/>
 				<button
-					class="form-element form-element-submit"
-					type="submit"
-					aria-label="Donate"
+					class="form-element form-element-donate"
+					type="button"
+					aria-label="Donate with Stripe"
+					@click="onDonateWithStripe"
 				>
 					<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
-					<span class="text">Donate</span>
+					<span class="text">Donate with Stripe</span>
+				</button>
+				<button
+					class="form-element form-element-donate"
+					type="button"
+					aria-label="Donate with PayPal"
+					@click="onDonateWithPayPal"
+				>
+					<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
+					<span class="text">Donate with PayPal</span>
 				</button>
 			</div>
 			<p class="form-paragraph" v-if="errorMessage.length > 0">
@@ -53,56 +71,62 @@ export default {
 	name: 'App',
 	data() {
 		return {
-			stripe: null,
-			publishableKey: 'pk_test_Tsub0AZ6ebZrZDlsXB4DRxPp00VThGBxg8',
-			skuId: 'sku_Fdijf3icMPOTBV',
-			skuQuantity: 10,
-			skus: [
-				{ id: 'sku_Fdijf3icMPOTBV', name: 'USD', sign: '$' },
-				{ id: 'sku_FdijQbHVKGF6cl', name: 'EUR', sign: '€' },
-				{ id: 'sku_FdlXfi5fXRpjVz', name: 'JPY', sign: '¥' },
-				{ id: 'sku_FdikHBeDYiEVhT', name: 'GBP', sign: '£' },
-				{ id: 'sku_FdlS2f9kBKV0Mg', name: 'AUD', sign: '$' },
-				{ id: 'sku_FdlSZaaJsoV4ly', name: 'CAD', sign: '$' },
-				{ id: 'sku_FdlSb5B40weJ0P', name: 'CHF', sign: 'Fr.' },
-				{ id: 'sku_FdlSm7WqQZRhxg', name: 'CNY', sign: '¥' },
-				{ id: 'sku_FdlTV8IcySlCTS', name: 'SEK', sign: 'kr' },
-				{ id: 'sku_FdlT4cF0utrxQf', name: 'NZD', sign: '$' },
-				{ id: 'sku_FdlTmqefXqHHvm', name: 'MXN', sign: '$' },
-				{ id: 'sku_FdlT4UTcFLzvqS', name: 'SGD', sign: '$' },
-				{ id: 'sku_FdlTDI7hsZuxt3', name: 'HKD', sign: '$' },
-				{ id: 'sku_FdlTUI7GTqyX4k', name: 'NOK', sign: 'kr' },
-				{ id: 'sku_FdlUByKnyVtfJL', name: 'KRW', sign: '₩' },
-				{ id: 'sku_FdlUBSxge3bqHE', name: 'TRY', sign: '₺' },
-				{ id: 'sku_FdlH69g0LjlvCU', name: 'RUB', sign: '₽' },
-				{ id: 'sku_FdlUu2AxLfi8EO', name: 'INR', sign: '₹' },
-				{ id: 'sku_FdlUgarCRyzcSc', name: 'BRL', sign: 'R$' },
-				{ id: 'sku_FdlUSSuEUmJKJo', name: 'ZAR', sign: 'R' }
-			]
-				.filter(i => i.id.length > 0)
-				.sort((a, b) => a.name.localeCompare(b.name)),
-			successUrl: window.location.origin,
-			cancelUrl: window.location.href,
-			submitType: 'donate',
+			stripe: Stripe('pk_test_Tsub0AZ6ebZrZDlsXB4DRxPp00VThGBxg8'),
+			paypalMeUrl: 'https://www.paypal.me/hectormf/',
+			amount: 10,
+			currency: 'USD',
+			currencies: {
+				AUD: { symbol: '$', stripeSkuId: 'sku_FeANfLsdAeHxho' },
+				CAD: { symbol: '$', stripeSkuId: 'sku_FeANgaLZj0jseZ' },
+				CHF: { symbol: 'Fr.', stripeSkuId: 'sku_FeANkpGsYSQsBC' },
+				CZK: { symbol: 'Kč', stripeSkuId: 'sku_FeANhC1eA1d5lw' },
+				DKK: { symbol: 'kr', stripeSkuId: 'sku_FeAOUrsSfsZIAI' },
+				EUR: { symbol: '€', stripeSkuId: 'sku_FeAOECesAPZN4e' },
+				GBP: { symbol: '£', stripeSkuId: 'sku_FeAOkbzAPmbaCL' },
+				HKD: { symbol: '$', stripeSkuId: 'sku_FeAOk8gyokprGG' },
+				HUF: { symbol: 'Ft', stripeSkuId: 'sku_FeAOZ0jBt7CyAa' },
+				ILS: { symbol: '₪', stripeSkuId: 'sku_FeAO2C1sI79hPI' },
+				JPY: { symbol: '¥', stripeSkuId: 'sku_FeAOAmxUiYIOw9' },
+				MXN: { symbol: '$', stripeSkuId: 'sku_FeAPaD90cSuDqx' },
+				NOK: { symbol: 'kr', stripeSkuId: 'sku_FeAPAlNbGJuA3Q' },
+				NZD: { symbol: '$', stripeSkuId: 'sku_FeAPX7fAlCzken' },
+				PLN: { symbol: 'zł', stripeSkuId: 'sku_FeAPAiDm0XHvNf' },
+				RUB: { symbol: '₽', stripeSkuId: 'sku_FeAPaa9yYDm4vz' },
+				SEK: { symbol: 'kr', stripeSkuId: 'sku_FeAPtSWEa5q0Ck' },
+				SGD: { symbol: '$', stripeSkuId: 'sku_FeAQAeKTDSM9rZ' },
+				TRY: { symbol: 'TL', stripeSkuId: 'sku_FeAQxCKx4FLqtt' },
+				USD: { symbol: '$', stripeSkuId: 'sku_FeAQBPSAIv51ru' }
+			},
 			errorMessage: ''
 		};
 	},
-	created() {
-		try {
-			this.stripe = Stripe(this.publishableKey);
-		} catch (error) {
-			this.errorMessage = error.message;
-		}
-	},
 	methods: {
-		async onSubmit() {
+		async onDonateWithStripe() {
 			try {
+				const isValidForm = this.$refs.form.checkValidity();
+				if (!isValidForm) return;
+
+				const sku = this.currencies[this.currency].stripeSkuId;
+				const quantity = this.amount;
 				await this.stripe.redirectToCheckout({
-					items: [{ sku: this.skuId, quantity: this.skuQuantity }],
-					successUrl: this.successUrl,
-					cancelUrl: this.cancelUrl,
-					submitType: this.submitType
+					items: [{ sku, quantity }],
+					successUrl: window.location.origin,
+					cancelUrl: window.location.href,
+					submitType: 'donate'
 				});
+			} catch (error) {
+				this.errorMessage = error.message;
+			}
+		},
+		async onDonateWithPayPal() {
+			try {
+				const isValidForm = this.$refs.form.checkValidity();
+				if (!isValidForm) return;
+
+				window.location.href =
+					this.paypalMeUrl +
+					encodeURIComponent(this.amount) +
+					encodeURIComponent(this.currency);
 			} catch (error) {
 				this.errorMessage = error.message;
 			}
@@ -173,14 +197,14 @@ body {
 
 			&.form-element-currency {
 				margin-right: 0;
-				width: rem(100);
+				width: rem(110);
 				border-radius: rem(3) 0 0 rem(3);
 				cursor: pointer;
 				appearance: none;
 			}
 
 			&.form-element-amount {
-				width: rem(100);
+				width: rem(110);
 				text-align: right;
 				border-radius: 0 rem(3) rem(3) 0;
 				appearance: textfield;
@@ -190,7 +214,8 @@ body {
 				}
 			}
 
-			&.form-element-submit {
+			&.form-element-donate {
+				width: rem(220);
 				cursor: pointer;
 				appearance: none;
 			}
