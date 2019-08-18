@@ -81,7 +81,7 @@ export default {
 			]
 				.filter(i => i.id.length > 0)
 				.sort((a, b) => a.name.localeCompare(b.name)),
-			successUrl: window.location.href,
+			successUrl: window.location.origin,
 			cancelUrl: window.location.href,
 			submitType: 'donate',
 			errorMessage: ''
