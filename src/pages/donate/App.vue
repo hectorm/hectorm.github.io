@@ -172,6 +172,10 @@ body {
 			margin-bottom: rem(20);
 		}
 
+		.form-controls {
+			text-align: center;
+		}
+
 		.form-element {
 			margin: 0 rem(20) rem(20) 0;
 			padding: rem(8) rem(15);
