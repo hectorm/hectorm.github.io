@@ -156,7 +156,7 @@ body {
 
 	.form {
 		margin: rem(30);
-		max-width: rem(768);
+		max-width: rem(750);
 		z-index: 1;
 
 		.form-title,
@@ -170,14 +170,16 @@ body {
 
 		.form-paragraph {
 			margin-bottom: rem(20);
+			text-align: justify;
 		}
 
 		.form-controls {
+			margin-top: rem(30);
 			text-align: center;
 		}
 
 		.form-element {
-			margin: 0 rem(20) rem(20) 0;
+			margin: rem(10);
 			padding: rem(8) rem(15);
 			height: rem(40);
 
@@ -201,14 +203,15 @@ body {
 
 			&.form-element-currency {
 				margin-right: 0;
-				width: rem(110);
+				width: rem(115);
 				border-radius: rem(3) 0 0 rem(3);
 				cursor: pointer;
 				appearance: none;
 			}
 
 			&.form-element-amount {
-				width: rem(110);
+				margin-left: 0;
+				width: rem(115);
 				text-align: right;
 				border-radius: 0 rem(3) rem(3) 0;
 				appearance: textfield;
@@ -219,7 +222,7 @@ body {
 			}
 
 			&.form-element-donate {
-				width: rem(220);
+				width: rem(230);
 				cursor: pointer;
 				appearance: none;
 			}
