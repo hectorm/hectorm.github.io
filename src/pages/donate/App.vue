@@ -67,38 +67,47 @@
 </template>
 
 <script>
+import stripeKeys from './assets/stripe/test.json';
+
 export default {
 	name: 'App',
 	data() {
 		return {
-			stripe: Stripe('pk_test_Tsub0AZ6ebZrZDlsXB4DRxPp00VThGBxg8'),
+			stripe: null,
 			paypalMeUrl: 'https://www.paypal.me/hectormf/',
 			amount: 10,
 			currency: 'USD',
 			currencies: {
-				AUD: { symbol: '$', stripeSkuId: 'sku_FeANfLsdAeHxho' },
-				CAD: { symbol: '$', stripeSkuId: 'sku_FeANgaLZj0jseZ' },
-				CHF: { symbol: 'Fr.', stripeSkuId: 'sku_FeANkpGsYSQsBC' },
-				CZK: { symbol: 'Kč', stripeSkuId: 'sku_FeANhC1eA1d5lw' },
-				DKK: { symbol: 'kr', stripeSkuId: 'sku_FeAOUrsSfsZIAI' },
-				EUR: { symbol: '€', stripeSkuId: 'sku_FeAOECesAPZN4e' },
-				GBP: { symbol: '£', stripeSkuId: 'sku_FeAOkbzAPmbaCL' },
-				HKD: { symbol: '$', stripeSkuId: 'sku_FeAOk8gyokprGG' },
-				HUF: { symbol: 'Ft', stripeSkuId: 'sku_FeAOZ0jBt7CyAa' },
-				ILS: { symbol: '₪', stripeSkuId: 'sku_FeAO2C1sI79hPI' },
-				JPY: { symbol: '¥', stripeSkuId: 'sku_FeAOAmxUiYIOw9' },
-				MXN: { symbol: '$', stripeSkuId: 'sku_FeAPaD90cSuDqx' },
-				NOK: { symbol: 'kr', stripeSkuId: 'sku_FeAPAlNbGJuA3Q' },
-				NZD: { symbol: '$', stripeSkuId: 'sku_FeAPX7fAlCzken' },
-				PLN: { symbol: 'zł', stripeSkuId: 'sku_FeAPAiDm0XHvNf' },
-				RUB: { symbol: '₽', stripeSkuId: 'sku_FeAPaa9yYDm4vz' },
-				SEK: { symbol: 'kr', stripeSkuId: 'sku_FeAPtSWEa5q0Ck' },
-				SGD: { symbol: '$', stripeSkuId: 'sku_FeAQAeKTDSM9rZ' },
-				TRY: { symbol: 'TL', stripeSkuId: 'sku_FeAQxCKx4FLqtt' },
-				USD: { symbol: '$', stripeSkuId: 'sku_FeAQBPSAIv51ru' }
+				AUD: { symbol: '$' },
+				CAD: { symbol: '$' },
+				CHF: { symbol: 'Fr.' },
+				CZK: { symbol: 'Kč' },
+				DKK: { symbol: 'kr' },
+				EUR: { symbol: '€' },
+				GBP: { symbol: '£' },
+				HKD: { symbol: '$' },
+				HUF: { symbol: 'Ft' },
+				ILS: { symbol: '₪' },
+				JPY: { symbol: '¥' },
+				MXN: { symbol: '$' },
+				NOK: { symbol: 'kr' },
+				NZD: { symbol: '$' },
+				PLN: { symbol: 'zł' },
+				RUB: { symbol: '₽' },
+				SEK: { symbol: 'kr' },
+				SGD: { symbol: '$' },
+				TRY: { symbol: 'TL' },
+				USD: { symbol: '$' }
 			},
 			errorMessage: ''
 		};
+	},
+	async created() {
+		try {
+			this.stripe = Stripe(stripeKeys.publishableKey);
+		} catch (error) {
+			this.errorMessage = error.message;
+		}
 	},
 	methods: {
 		async onDonateWithStripe() {
@@ -106,7 +115,7 @@ export default {
 				const isValidForm = this.$refs.form.checkValidity();
 				if (!isValidForm) return;
 
-				const sku = this.currencies[this.currency].stripeSkuId;
+				const sku = stripeKeys.skuIds[this.currency];
 				const quantity = this.amount;
 				await this.stripe.redirectToCheckout({
 					items: [{ sku, quantity }],
