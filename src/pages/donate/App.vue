@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import stripeKeys from './assets/stripe/test.json';
+import stripeKeys from './assets/stripe/live.json';
 
 export default {
 	name: 'App',
