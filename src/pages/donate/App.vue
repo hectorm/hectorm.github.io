@@ -174,7 +174,7 @@ body {
 		}
 
 		.form-controls {
-			margin-top: rem(30);
+			margin-bottom: rem(20);
 			text-align: center;
 		}
 
