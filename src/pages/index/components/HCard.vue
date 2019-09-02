@@ -38,7 +38,7 @@
 			<h-button
 				class="button pointer"
 				text="Donate"
-				link="https://www.paypal.me/hectormf"
+				link="/donate"
 				:icon="['fas', 'heart']"
 			/>
 		</div>
