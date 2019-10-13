@@ -1,38 +1,40 @@
-image: node:10-stretch
-
 stages:
-  - lint
-  - build
-  - deploy
+  - "lint"
+  - "build"
+  - "deploy"
 
-cache:
-  paths:
-    - node_modules/
-
-before_script:
-  - npm install
+default:
+  image: "node:lts"
+  before_script:
+    - "npm install"
+  cache:
+    paths:
+      - "./node_modules/"
 
 lint:
-  stage: lint
+  stage: "lint"
   script:
-    - npm run lint
+    - "npm run lint"
+  cache:
+    paths:
+      - "./node_modules/"
 
 build:
-  stage: build
+  stage: "build"
   script:
-    - npm run build
+    - "npm run build"
   artifacts:
-    expire_in: 1 hour
+    expire_in: "1 hour"
     paths:
-      - dist/
+      - "./dist/"
 
 pages:
-  stage: deploy
+  stage: "deploy"
+  only:
+    - "page"
   script:
-    - rm -rf public/
-    - mv dist/ public/
+    - "rm -rf ./public/"
+    - "mv ./dist/ ./public/"
   artifacts:
     paths:
-      - public/
-  only:
-    - page
+      - "./public/"
