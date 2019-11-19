@@ -1,6 +1,6 @@
 <template>
 	<div class="app">
-		<form class="form" ref="form" @submit.prevent>
+		<form ref="form" class="form" @submit.prevent>
 			<h1 class="form-title">
 				Donate to
 				<a href="https://hector.molinero.dev">Héctor Molinero Fernández</a>
@@ -19,8 +19,8 @@
 			</p>
 			<div class="form-controls">
 				<select
-					class="form-element form-element-currency"
 					v-model="currency"
+					class="form-element form-element-currency"
 					aria-label="Currency"
 				>
 					<option
@@ -32,8 +32,8 @@
 					</option>
 				</select>
 				<input
-					class="form-element form-element-amount"
 					v-model.number="amount"
+					class="form-element form-element-amount"
 					type="number"
 					step="1"
 					min="1"
@@ -59,7 +59,7 @@
 					<span class="text">Donate with PayPal</span>
 				</button>
 			</div>
-			<p class="form-paragraph" v-if="errorMessage.length > 0">
+			<p v-if="errorMessage.length > 0" class="form-paragraph">
 				<strong>Error:</strong> {{ errorMessage }}
 			</p>
 		</form>

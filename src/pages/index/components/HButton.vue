@@ -12,10 +12,10 @@
 export default {
 	name: 'HButton',
 	props: {
-		text: String,
-		link: String,
-		icon: Array,
-		isObfuscated: Boolean
+		text: { type: String, default: '' },
+		link: { type: String, default: '' },
+		icon: { type: Array, default: undefined },
+		isObfuscated: { type: Boolean, default: false }
 	},
 	computed: {
 		href() {
