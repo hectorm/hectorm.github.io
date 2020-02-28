@@ -15,12 +15,5 @@ module.exports = {
 			filename: 'donate/index.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'donate']
 		}
-	},
-	css: {
-		loaderOptions: {
-			sass: {
-				prependData: `@import '~@/scss/utilities/all';`
-			}
-		}
 	}
 };

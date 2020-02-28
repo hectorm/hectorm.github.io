@@ -45,6 +45,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~@/scss/utilities/all';
+
 .button {
 	display: inline-flex;
 	flex-direction: row;

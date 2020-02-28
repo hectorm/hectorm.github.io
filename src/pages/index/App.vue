@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/scss/utilities/all';
+
 body {
 	margin: 0;
 	height: 100vh;

@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~@/scss/utilities/all';
+
 .card {
 	padding: rem(20);
 	text-align: center;
