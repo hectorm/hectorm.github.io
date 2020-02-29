@@ -1,5 +1,5 @@
 module.exports = {
-	publicPath: '/',
+	publicPath: './',
 	integrity: true,
 	productionSourceMap: false,
 	pages: {
@@ -11,8 +11,8 @@ module.exports = {
 		},
 		donate: {
 			entry: 'src/pages/donate/main.js',
-			template: 'public/donate/index.html',
-			filename: 'donate/index.html',
+			template: 'public/donate.html',
+			filename: 'donate.html',
 			chunks: ['chunk-vendors', 'chunk-common', 'donate']
 		}
 	}

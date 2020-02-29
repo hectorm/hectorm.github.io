@@ -32,13 +32,13 @@
 			<h-button
 				class="button pointer"
 				text="PGP"
-				link="key.asc"
+				link="./key.asc"
 				:icon="['fas', 'key']"
 			/>
 			<h-button
 				class="button pointer"
 				text="Donate"
-				link="/donate"
+				link="./donate.html"
 				:icon="['fas', 'heart']"
 			/>
 		</div>

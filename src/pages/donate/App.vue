@@ -3,7 +3,7 @@
 		<form ref="form" class="form" @submit.prevent>
 			<h1 class="form-title">
 				Donate to
-				<a href="https://hector.molinero.dev">Héctor Molinero Fernández</a>
+				<a href="./">Héctor Molinero Fernández</a>
 			</h1>
 			<p class="form-paragraph">
 				Thanks for your interest in supporting my work! Your donation here
