@@ -53,8 +53,8 @@ export default {
 	name: 'HCard',
 	components: {
 		HButton,
-		HLogo
-	}
+		HLogo,
+	},
 };
 </script>
 

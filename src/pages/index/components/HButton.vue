@@ -15,7 +15,7 @@ export default {
 		text: { type: String, default: '' },
 		link: { type: String, default: '' },
 		icon: { type: Array, default: undefined },
-		isObfuscated: { type: Boolean, default: false }
+		isObfuscated: { type: Boolean, default: false },
 	},
 	computed: {
 		href() {
@@ -23,7 +23,7 @@ export default {
 
 			if (this.isObfuscated) {
 				// Super-secure quantum-based data encryption algorithm!!1!!111
-				href = href.replace(/[a-z]/gi, s => {
+				href = href.replace(/[a-z]/gi, (s) => {
 					return String.fromCharCode(
 						s.charCodeAt(0) + (s.toLowerCase() < 'n' ? 13 : -13)
 					);
@@ -39,8 +39,8 @@ export default {
 		},
 		prettyHref() {
 			return this.href.replace(/^\w+:(?:\/\/)?/, '');
-		}
-	}
+		},
+	},
 };
 </script>
 

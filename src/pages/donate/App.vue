@@ -97,9 +97,9 @@ export default {
 				SEK: { symbol: 'kr' },
 				SGD: { symbol: '$' },
 				TRY: { symbol: 'TL' },
-				USD: { symbol: '$' }
+				USD: { symbol: '$' },
 			},
-			errorMessage: ''
+			errorMessage: '',
 		};
 	},
 	async created() {
@@ -121,7 +121,7 @@ export default {
 					items: [{ sku, quantity }],
 					successUrl: window.location.origin,
 					cancelUrl: window.location.href,
-					submitType: 'donate'
+					submitType: 'donate',
 				});
 			} catch (error) {
 				this.errorMessage = error.message;
@@ -139,8 +139,8 @@ export default {
 			} catch (error) {
 				this.errorMessage = error.message;
 			}
-		}
-	}
+		},
+	},
 };
 </script>
 

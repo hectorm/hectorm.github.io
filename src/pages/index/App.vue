@@ -13,8 +13,8 @@ export default {
 	name: 'App',
 	components: {
 		NodeGarden,
-		HCard
-	}
+		HCard,
+	},
 };
 </script>
 

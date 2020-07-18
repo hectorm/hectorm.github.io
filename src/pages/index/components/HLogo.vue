@@ -76,7 +76,7 @@
 
 <script>
 export default {
-	name: 'HLogo'
+	name: 'HLogo',
 };
 </script>
 
