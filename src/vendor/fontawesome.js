@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-Vue.component('font-awesome-icon', async () => {
+Vue.component('FontAwesomeIcon', async () => {
 	const [{ FontAwesomeIcon }, { config, library }] = await Promise.all([
 		/* eslint-disable prettier/prettier */
 		import(/* webpackMode: "eager" */ '@fortawesome/vue-fontawesome'),
