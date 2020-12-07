@@ -115,13 +115,14 @@ export default {
 				const isValidForm = this.$refs.form.checkValidity();
 				if (!isValidForm) return;
 
-				const sku = stripeKeys.skuIds[this.currency];
+				const price = stripeKeys.skuIds[this.currency];
 				const quantity = this.amount;
 				await this.stripe.redirectToCheckout({
-					items: [{ sku, quantity }],
+					mode: 'payment',
+					submitType: 'donate',
+					lineItems: [{ price, quantity }],
 					successUrl: window.location.origin,
 					cancelUrl: window.location.href,
-					submitType: 'donate',
 				});
 			} catch (error) {
 				this.errorMessage = error.message;
