@@ -74,7 +74,7 @@ export default {
 	data() {
 		return {
 			stripe: null,
-			paypalMeUrl: 'https://www.paypal.me/hectormf/',
+			paypalId: 'HZ5SP6EEMXXYE',
 			amount: 10,
 			currency: 'USD',
 			currencies: {
@@ -134,9 +134,11 @@ export default {
 				if (!isValidForm) return;
 
 				window.location.href =
-					this.paypalMeUrl +
-					encodeURIComponent(this.amount) +
-					encodeURIComponent(this.currency);
+					'https://www.paypal.com/donate/?cmd=_donations' +
+					`&business=${this.paypalId}` +
+					`&amount=${encodeURIComponent(this.amount)}` +
+					`&currency_code=${encodeURIComponent(this.currency)}` +
+					'&no_note=0';
 			} catch (error) {
 				this.errorMessage = error.message;
 			}
