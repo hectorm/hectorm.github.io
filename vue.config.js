@@ -1,6 +1,6 @@
 module.exports = {
 	publicPath: './',
-	integrity: true,
+	integrity: process.env.NODE_ENV === 'production',
 	productionSourceMap: false,
 	pages: {
 		index: {
