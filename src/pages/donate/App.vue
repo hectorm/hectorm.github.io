@@ -1,69 +1,67 @@
 <template>
-	<div class="app">
-		<form ref="form" class="form" @submit.prevent>
-			<h1 class="form-title">
-				Donate to
-				<a href="./">Héctor Molinero Fernández</a>
-			</h1>
-			<p class="form-paragraph">
-				Thanks for your interest in supporting my work! Your donation here
-				supports my open source projects on
-				<a href="https://github.com/hectorm">GitHub</a> and
-				<a href="https://gitlab.com/hectorm">GitLab</a>.
-			</p>
-			<p class="form-paragraph">
-				Donations are securely processed through
-				<a href="https://stripe.com">Stripe</a> or
-				<a href="https://paypal.com">PayPal</a>, and your payment information is
-				not stored on my servers.
-			</p>
-			<div class="form-controls">
-				<select
-					v-model="currency"
-					class="form-element form-element-currency"
-					aria-label="Currency"
+	<form ref="form" class="form" @submit.prevent>
+		<h1 class="form-title">
+			Donate to
+			<a href="./">Héctor Molinero Fernández</a>
+		</h1>
+		<p class="form-paragraph">
+			Thanks for your interest in supporting my work! Your donation here
+			supports my open source projects on
+			<a href="https://github.com/hectorm">GitHub</a> and
+			<a href="https://gitlab.com/hectorm">GitLab</a>.
+		</p>
+		<p class="form-paragraph">
+			Donations are securely processed through
+			<a href="https://stripe.com">Stripe</a> or
+			<a href="https://paypal.com">PayPal</a>, and your payment information is
+			not stored on my servers.
+		</p>
+		<div class="form-controls">
+			<select
+				v-model="currency"
+				class="form-element form-element-currency"
+				aria-label="Currency"
+			>
+				<option
+					v-for="({ symbol }, name) in currencies"
+					:key="name"
+					:value="name"
 				>
-					<option
-						v-for="({ symbol }, name) in currencies"
-						:key="name"
-						:value="name"
-					>
-						{{ name }}&nbsp;&nbsp;&nbsp;{{ symbol }}
-					</option>
-				</select>
-				<input
-					v-model.number="amount"
-					class="form-element form-element-amount"
-					type="number"
-					step="1"
-					min="1"
-					placeholder="Amount"
-					aria-label="Amount"
-				/>
-				<button
-					class="form-element form-element-donate"
-					type="button"
-					aria-label="Donate with Stripe"
-					@click="onDonateWithStripe"
-				>
-					<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
-					<span class="text">Donate with Stripe</span>
-				</button>
-				<button
-					class="form-element form-element-donate"
-					type="button"
-					aria-label="Donate with PayPal"
-					@click="onDonateWithPayPal"
-				>
-					<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
-					<span class="text">Donate with PayPal</span>
-				</button>
-			</div>
-			<p v-if="errorMessage.length > 0" class="form-paragraph">
-				<strong>Error:</strong> {{ errorMessage }}
-			</p>
-		</form>
-	</div>
+					{{ name }}&nbsp;&nbsp;&nbsp;{{ symbol }}
+				</option>
+			</select>
+			<input
+				v-model.number="amount"
+				class="form-element form-element-amount"
+				type="number"
+				step="1"
+				min="1"
+				placeholder="Amount"
+				aria-label="Amount"
+			/>
+			<button
+				class="form-element form-element-donate"
+				type="button"
+				aria-label="Donate with Stripe"
+				@click="onDonateWithStripe"
+			>
+				<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
+				<span class="text">Donate with Stripe</span>
+			</button>
+			<button
+				class="form-element form-element-donate"
+				type="button"
+				aria-label="Donate with PayPal"
+				@click="onDonateWithPayPal"
+			>
+				<font-awesome-icon class="icon" :icon="['fas', 'heart']" />
+				<span class="text">Donate with PayPal</span>
+			</button>
+		</div>
+		<p v-if="errorMessage.length > 0" class="form-paragraph">
+			<strong>Error:</strong> {{ errorMessage }}
+		</p>
+	</form>
 </template>
 
 <script>
@@ -160,7 +158,7 @@ body {
 	background-color: map-get($theme-colors, 'dark');
 }
 
-.app {
+#app {
 	display: flex;
 	position: relative;
 	flex-direction: column;

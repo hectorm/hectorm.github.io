@@ -1,3 +1,5 @@
+<!-- Based on https://github.com/pakastin/nodegarden -->
+
 <template>
 	<div
 		ref="container"
@@ -11,9 +13,8 @@
 </template>
 
 <script>
-/*
- * Based on: https://github.com/pakastin/nodegarden
- */
+import { markRaw } from 'vue';
+
 const defaultTo = (value, defaultValue) => {
 	return typeof value === 'undefined' ? defaultValue : value;
 };
@@ -90,12 +91,12 @@ export class Node {
 export default {
 	name: 'NodeGarden',
 	data() {
-		return {
+		return markRaw({
 			mounted: false,
 			width: 0,
 			height: 0,
 			ctx: null,
-			nodes: [],
+			nodes: null,
 			mouseNode: null,
 			maxNodes: 200,
 			colors: {
@@ -103,11 +104,12 @@ export default {
 				repel: { r: 0x5e, g: 0x81, b: 0xac },
 				attract: { r: 0xbf, g: 0x61, b: 0x6a },
 			},
-		};
+		});
 	},
 	mounted() {
 		this.$nextTick(function () {
 			this.mounted = true;
+
 			this.ctx = this.$refs.canvas.getContext('2d');
 			this.nodes = [];
 
@@ -123,20 +125,22 @@ export default {
 			this.mouseNode.y = Number.MAX_SAFE_INTEGER;
 			this.nodes.unshift(this.mouseNode);
 
-			this.resize();
-			this.render();
+			setTimeout(() => {
+				this.resize();
+				this.render();
+			}, 10);
 
 			window.addEventListener('resize', this.resize);
 		});
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.mounted = false;
 		window.removeEventListener('resize', this.resize);
 	},
 	methods: {
 		render() {
-			if (this.mounted) {
-				requestAnimationFrame(this.render);
+			if (!this.mounted) {
+				return;
 			}
 
 			// Clear canvas.
@@ -200,6 +204,8 @@ export default {
 				this.nodes[i].render();
 				this.nodes[i].update();
 			}
+
+			requestAnimationFrame(this.render);
 		},
 		resize() {
 			// If retina screen, scale canvas.

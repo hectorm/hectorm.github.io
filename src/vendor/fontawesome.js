@@ -1,30 +1,28 @@
-import Vue from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
-Vue.component('FontAwesomeIcon', async () => {
-	const [{ FontAwesomeIcon }, { config, library }] = await Promise.all([
-		/* eslint-disable prettier/prettier */
-		import(/* webpackMode: "eager" */ '@fortawesome/vue-fontawesome'),
-		import(/* webpackMode: "eager" */ '@fortawesome/fontawesome-svg-core'),
-		import(/* webpackMode: "eager" */ '@fortawesome/fontawesome-svg-core/styles.css')
-		/* eslint-enable */
-	]);
+// prettier-ignore
+import {
+	faEnvelope,
+	faHeart,
+	faKey,
+} from '@fortawesome/free-solid-svg-icons';
 
-	config.autoAddCss = false;
+// prettier-ignore
+import {
+	faDocker,
+	faGithub,
+	faGitlab,
+} from '@fortawesome/free-brands-svg-icons';
 
-	const icons = await Promise.all([
-		/* eslint-disable prettier/prettier */
-		import(/* webpackMode: "eager" */ '@fortawesome/free-brands-svg-icons/faDocker'),
-		import(/* webpackMode: "eager" */ '@fortawesome/free-brands-svg-icons/faGithub'),
-		import(/* webpackMode: "eager" */ '@fortawesome/free-brands-svg-icons/faGitlab'),
-		import(/* webpackMode: "eager" */ '@fortawesome/free-solid-svg-icons/faEnvelope'),
-		import(/* webpackMode: "eager" */ '@fortawesome/free-solid-svg-icons/faHeart'),
-		import(/* webpackMode: "eager" */ '@fortawesome/free-solid-svg-icons/faKey'),
-		/* eslint-enable */
-	]);
+// prettier-ignore
+library.add(
+	faDocker,
+	faEnvelope,
+	faGithub,
+	faGitlab,
+	faHeart,
+	faKey,
+);
 
-	icons.map((icon) => {
-		library.add(icon.definition);
-	});
-
-	return FontAwesomeIcon;
-});
+export { FontAwesomeIcon };

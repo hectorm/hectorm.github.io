@@ -1,8 +1,6 @@
 <template>
-	<div class="app">
-		<h-card class="card" />
-		<node-garden class="node-garden" />
-	</div>
+	<h-card class="card" />
+	<node-garden class="node-garden" />
 </template>
 
 <script>
@@ -31,7 +29,7 @@ body {
 	background-color: map-get($theme-colors, 'dark');
 }
 
-.app {
+#app {
 	display: flex;
 	position: relative;
 	flex-direction: column;
