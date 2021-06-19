@@ -1,0 +1,52 @@
+name: 'Publish'
+
+on:
+  push:
+    branches: ['publish']
+
+jobs:
+
+  publish:
+    name: 'Publish'
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - name: 'Checkout project'
+        uses: 'actions/checkout@v2'
+      - name: 'Setup Node.js'
+        uses: 'actions/setup-node@v2'
+        with:
+          node-version: '16'
+      - name: 'Cache node modules'
+        uses: 'actions/cache@v2'
+        with:
+          key: "node-modules-${{hashFiles('**/package-lock.json')}}-${{runner.os}}"
+          path: './node_modules/'
+      - name: 'Install dependencies'
+        run: |
+          npm install
+      - name: 'Lint'
+        run: |
+          npm run lint
+      - name: 'Build'
+        run: |
+          npm run build
+      - name: 'Publish'
+        run: |
+          branch='gh-pages'; dir='./dist/'; commit='no'
+          git config user.name "${GITHUB_ACTOR:?}"
+          if git ls-remote --exit-code origin refs/heads/"${branch:?}"; then
+            git fetch --force origin "${branch:?}":"${branch:?}"
+            git symbolic-ref HEAD refs/heads/"${branch:?}"
+            git --work-tree "${dir:?}" reset --mixed
+            git --work-tree "${dir:?}" add --all
+            ret='0'; git --work-tree "${dir:?}" diff --exit-code HEAD -- || ret="$?"
+            if [ "${ret:?}" = '1' ]; then commit='yes'; fi
+          else
+            git --work-tree "${dir:?}" checkout --orphan "${branch:?}"
+            git --work-tree "${dir:?}" add --all
+            commit='yes'
+          fi
+          if [ "${commit:?}" = 'yes' ]; then
+            git --work-tree "${dir:?}" commit -m "Deploy $(date -Iseconds)"
+            git push origin "${branch:?}"
+          fi
