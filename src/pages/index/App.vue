@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import NodeGarden from '@/components/NodeGarden.vue';
+import NodeGarden from '~/common/components/NodeGarden.vue';
 import HCard from './components/HCard.vue';
 
 export default {
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/scss/utilities/all';
+@import '~/common/scss/utilities/all';
 
 body {
 	margin: 0;

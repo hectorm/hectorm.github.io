@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~@/scss/utilities/all';
+@import '~/common/scss/utilities/all';
 
 @keyframes fadeIn {
 	0% {
