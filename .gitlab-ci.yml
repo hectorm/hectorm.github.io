@@ -1,0 +1,42 @@
+stages:
+  - 'lint'
+  - 'build'
+  - 'deploy'
+
+default:
+  image: 'docker.io/node:lts'
+  cache:
+    key:
+      files:
+        - './package-lock.json'
+    paths:
+      - './node_modules/'
+
+lint:
+  stage: 'lint'
+  before_script:
+    - 'npm install'
+  script:
+    - 'npm run lint'
+
+build:
+  stage: 'build'
+  before_script:
+    - 'npm install'
+  script:
+    - 'npm run build'
+  artifacts:
+    expire_in: '1 hour'
+    paths:
+      - './dist/'
+
+pages:
+  stage: 'deploy'
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "publish"'
+  script:
+    - 'rm -rf ./public/'
+    - 'mv ./dist/ ./public/'
+  artifacts:
+    paths:
+      - './public/'
