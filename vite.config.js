@@ -11,6 +11,7 @@ export default defineConfig({
 		},
 	},
 	root: path.join(__dirname, 'src/'),
+	base: './',
 	publicDir: path.join(__dirname, 'public/'),
 	build: {
 		outDir: path.join(__dirname, 'dist/'),
