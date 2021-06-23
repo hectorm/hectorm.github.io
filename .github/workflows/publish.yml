@@ -33,7 +33,8 @@ jobs:
       - name: 'Publish'
         run: |
           branch='dist'; dir='./dist/'; commit='no'
-          git config user.name "${GITHUB_ACTOR:?}"
+          git config user.name 'hectorm-bot'
+          git config user.email 'noreply@molinero.dev'
           if git ls-remote --exit-code origin refs/heads/"${branch:?}"; then
             git fetch --force origin "${branch:?}":"${branch:?}"
             git symbolic-ref HEAD refs/heads/"${branch:?}"
