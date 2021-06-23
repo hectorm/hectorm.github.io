@@ -32,7 +32,7 @@ jobs:
           npm run build
       - name: 'Publish'
         run: |
-          branch='gh-pages'; dir='./dist/'; commit='no'
+          branch='dist'; dir='./dist/'; commit='no'
           git config user.name "${GITHUB_ACTOR:?}"
           if git ls-remote --exit-code origin refs/heads/"${branch:?}"; then
             git fetch --force origin "${branch:?}":"${branch:?}"
