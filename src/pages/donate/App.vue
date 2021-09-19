@@ -192,8 +192,9 @@ body {
 
 		.form-element {
 			margin: rem(10);
-			padding: rem(8) rem(15);
+			padding: rem(6) rem(12);
 			height: rem(40);
+			vertical-align: middle;
 
 			font-size: rem(16);
 			font-weight: 700;
