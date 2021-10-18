@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="512px" height="512px" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet">
+	<title>ZNT favicon</title>
+	<g>
+		<line class="l" x1="032.00px" y1="096.00px" x2="992.00px" y2="096.00px" stroke="#263238" stroke-width="128px" />
+		<line class="l" x1="075.18px" y1="911.24px" x2="948.82px" y2="112.76px" stroke="#263238" stroke-width="128px" />
+		<line class="l" x1="032.00px" y1="928.00px" x2="992.00px" y2="928.00px" stroke="#263238" stroke-width="128px" />
+	</g>
+	<style type="text/css">
+		@media (prefers-color-scheme: dark) {
+			.l {
+				stroke: #E5E9F0 !important;
+			}
+		}
+	</style>
+</svg>
