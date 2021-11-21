@@ -14,16 +14,16 @@ default:
 
 lint:
   stage: 'lint'
-  before_script:
-    - 'npm install'
   script:
+    - 'npm ci'
     - 'npm run lint'
 
 build:
   stage: 'build'
-  before_script:
-    - 'npm install'
+  dependencies:
+    - 'lint'
   script:
+    - 'npm ci'
     - 'npm run build'
   artifacts:
     expire_in: '1 hour'
@@ -32,6 +32,8 @@ build:
 
 pages:
   stage: 'deploy'
+  dependencies:
+    - 'build'
   rules:
     - if: '$CI_COMMIT_BRANCH == "publish"'
   script:
