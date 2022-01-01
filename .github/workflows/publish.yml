@@ -3,33 +3,31 @@ name: 'Publish'
 on:
   push:
     branches: ['publish']
+  workflow_dispatch:
 
 jobs:
 
   publish:
-    name: 'Publish'
-    runs-on: 'ubuntu-20.04'
+    name: 'Node.js ${{matrix.node_version}} on ${{matrix.os}}'
+    runs-on: '${{matrix.os}}'
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        node_version: ['16']
     steps:
-      - name: 'Checkout project'
+      - name: 'Checkout'
         uses: 'actions/checkout@v2'
-      - name: 'Setup Node.js'
+      - name: 'Use Node.js ${{matrix.node_version}}'
         uses: 'actions/setup-node@v2'
         with:
-          node-version: '16'
-      - name: 'Cache node modules'
-        uses: 'actions/cache@v2'
-        with:
-          key: "node-modules-${{hashFiles('**/package-lock.json')}}-${{runner.os}}"
-          path: './node_modules/'
-      - name: 'Install dependencies'
-        run: |
-          npm ci
+          node-version: '${{matrix.node_version}}'
+          cache: 'npm'
+      - name: 'Install'
+        run: 'npm ci'
       - name: 'Lint'
-        run: |
-          npm run lint
+        run: 'npm run lint'
       - name: 'Build'
-        run: |
-          npm run build
+        run: 'npm run build'
       - name: 'Publish'
         run: |
           branch='dist'; dir='./dist/'; commit='no'
