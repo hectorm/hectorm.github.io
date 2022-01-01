@@ -20,15 +20,15 @@
     "vue": "~3.2.12"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "~1.9.4",
-    "@vue/compiler-sfc": "~3.2.22",
-    "eslint": "~8.3.0",
+    "@vitejs/plugin-vue": "~2.0.1",
+    "@vue/compiler-sfc": "~3.2.26",
+    "eslint": "~8.6.0",
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-prettier": "~4.0.0",
-    "eslint-plugin-vue": "~8.1.1",
-    "prettier": "~2.4.1",
-    "sass": "~1.43.4",
-    "sass-loader": "~12.3.0",
-    "vite": "~2.6.14"
+    "eslint-plugin-vue": "~8.2.0",
+    "prettier": "~2.5.1",
+    "sass": "~1.45.2",
+    "sass-loader": "~12.4.0",
+    "vite": "~2.7.10"
   }
 }
