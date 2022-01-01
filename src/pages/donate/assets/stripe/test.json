@@ -1,25 +1,25 @@
 {
-	"publishableKey": "pk_test_Tsub0AZ6ebZrZDlsXB4DRxPp00VThGBxg8",
-	"skuIds": {
-		"AUD": "sku_FeANfLsdAeHxho",
-		"CAD": "sku_FeANgaLZj0jseZ",
-		"CHF": "sku_FeANkpGsYSQsBC",
-		"CZK": "sku_FeANhC1eA1d5lw",
-		"DKK": "sku_FeAOUrsSfsZIAI",
-		"EUR": "sku_FeAOECesAPZN4e",
-		"GBP": "sku_FeAOkbzAPmbaCL",
-		"HKD": "sku_FeAOk8gyokprGG",
-		"HUF": "sku_FeAOZ0jBt7CyAa",
-		"ILS": "sku_FeAO2C1sI79hPI",
-		"JPY": "sku_FeAOAmxUiYIOw9",
-		"MXN": "sku_FeAPaD90cSuDqx",
-		"NOK": "sku_FeAPAlNbGJuA3Q",
-		"NZD": "sku_FeAPX7fAlCzken",
-		"PLN": "sku_FeAPAiDm0XHvNf",
-		"RUB": "sku_FeAPaa9yYDm4vz",
-		"SEK": "sku_FeAPtSWEa5q0Ck",
-		"SGD": "sku_FeAQAeKTDSM9rZ",
-		"TRY": "sku_FeAQxCKx4FLqtt",
-		"USD": "sku_FeAQBPSAIv51ru"
-	}
+  "publishableKey": "pk_test_Tsub0AZ6ebZrZDlsXB4DRxPp00VThGBxg8",
+  "skuIds": {
+    "AUD": "sku_FeANfLsdAeHxho",
+    "CAD": "sku_FeANgaLZj0jseZ",
+    "CHF": "sku_FeANkpGsYSQsBC",
+    "CZK": "sku_FeANhC1eA1d5lw",
+    "DKK": "sku_FeAOUrsSfsZIAI",
+    "EUR": "sku_FeAOECesAPZN4e",
+    "GBP": "sku_FeAOkbzAPmbaCL",
+    "HKD": "sku_FeAOk8gyokprGG",
+    "HUF": "sku_FeAOZ0jBt7CyAa",
+    "ILS": "sku_FeAO2C1sI79hPI",
+    "JPY": "sku_FeAOAmxUiYIOw9",
+    "MXN": "sku_FeAPaD90cSuDqx",
+    "NOK": "sku_FeAPAlNbGJuA3Q",
+    "NZD": "sku_FeAPX7fAlCzken",
+    "PLN": "sku_FeAPAiDm0XHvNf",
+    "RUB": "sku_FeAPaa9yYDm4vz",
+    "SEK": "sku_FeAPtSWEa5q0Ck",
+    "SGD": "sku_FeAQAeKTDSM9rZ",
+    "TRY": "sku_FeAQxCKx4FLqtt",
+    "USD": "sku_FeAQBPSAIv51ru"
+  }
 }

@@ -1,12 +1,12 @@
-@use 'sass:math';
+@use "sass:math";
 
 $em-base: 16 !default;
 $em-base-px: #{$em-base}px;
 
 @function em($pxval, $base: $em-base) {
-	@return math.div($pxval, $base) * 1em;
+  @return math.div($pxval, $base) * 1em;
 }
 
 @function rem($pxval, $base: $em-base) {
-	@return math.div($pxval, $base) * 1rem;
+  @return math.div($pxval, $base) * 1rem;
 }

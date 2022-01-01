@@ -1,5 +1,5 @@
 module.exports = {
-	globals: {
-		Stripe: 'readonly',
-	},
+  globals: {
+    Stripe: "readonly",
+  },
 };
