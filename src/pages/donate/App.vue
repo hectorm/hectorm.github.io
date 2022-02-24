@@ -45,7 +45,7 @@
         aria-label="Donate with Stripe"
         @click="onDonateWithStripe"
       >
-        <font-awesome-icon class="icon" :icon="['fas', 'heart']" />
+        <fa class="icon" :icon="faHeart" />
         <span class="text">Donate with Stripe</span>
       </button>
       <button
@@ -54,7 +54,7 @@
         aria-label="Donate with PayPal"
         @click="onDonateWithPayPal"
       >
-        <font-awesome-icon class="icon" :icon="['fas', 'heart']" />
+        <fa class="icon" :icon="faHeart" />
         <span class="text">Donate with PayPal</span>
       </button>
     </div>
@@ -65,10 +65,21 @@
 </template>
 
 <script>
+import Fa from "vue-fa";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
 import stripeKeys from "./assets/stripe/live.json";
 
 export default {
   name: "App",
+  components: {
+    Fa,
+  },
+  setup() {
+    return {
+      faHeart,
+    };
+  },
   data() {
     return {
       stripe: null,
@@ -242,8 +253,12 @@ body {
     }
   }
 
-  .icon + .text {
-    margin-left: rem(10);
+  .icon {
+    width: rem(18);
+
+    & + .text {
+      margin-left: rem(10);
+    }
   }
 }
 </style>

@@ -8,44 +8,52 @@
         class="button pointer"
         text="GitHub"
         link="https://github.com/hectorm"
-        :icon="['fab', 'github']"
+        :icon="faGithub"
       />
       <h-button
         class="button pointer"
         text="GitLab"
         link="https://gitlab.com/hectorm"
-        :icon="['fab', 'gitlab']"
+        :icon="faGitlab"
       />
       <h-button
         class="button pointer"
         text="Docker"
         link="https://hub.docker.com/u/hectormolinero"
-        :icon="['fab', 'docker']"
+        :icon="faDocker"
       />
       <h-button
         class="button pointer"
         text="Email"
         link="znvygb:urpgbe@zbyvareb.qri"
-        :icon="['fas', 'envelope']"
+        :icon="faEnvelope"
         :is-obfuscated="true"
       />
       <h-button
         class="button pointer"
         text="PGP"
         link="./key.asc"
-        :icon="['fas', 'key']"
+        :icon="faKey"
       />
       <h-button
         class="button pointer"
         text="Donate"
         link="./donate.html"
-        :icon="['fas', 'heart']"
+        :icon="faHeart"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  faDocker,
+  faGithub,
+  faGitlab,
+} from "@fortawesome/free-brands-svg-icons";
+
 import HButton from "./HButton.vue";
 import HLogo from "./HLogo.vue";
 
@@ -54,6 +62,16 @@ export default {
   components: {
     HButton,
     HLogo,
+  },
+  setup() {
+    return {
+      faDocker,
+      faEnvelope,
+      faGithub,
+      faGitlab,
+      faHeart,
+      faKey,
+    };
   },
 };
 </script>

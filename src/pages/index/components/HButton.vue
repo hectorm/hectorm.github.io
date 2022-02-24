@@ -1,6 +1,6 @@
 <template>
   <a class="button" :href="href">
-    <font-awesome-icon class="icon" :icon="icon" fixed-width />
+    <fa class="icon" :icon="icon" />
     <div class="content">
       <span class="text">{{ text }}</span>
       <span class="href">{{ prettyHref }}</span>
@@ -9,12 +9,17 @@
 </template>
 
 <script>
+import Fa from "vue-fa";
+
 export default {
   name: "HButton",
+  components: {
+    Fa,
+  },
   props: {
     text: { type: String, default: "" },
     link: { type: String, default: "" },
-    icon: { type: Array, default: undefined },
+    icon: { type: Object, default: undefined },
     isObfuscated: { type: Boolean, default: false },
   },
   computed: {
@@ -81,6 +86,7 @@ export default {
 
   .icon {
     flex-grow: 0;
+    width: rem(18);
     margin-right: rem(10);
   }
 
