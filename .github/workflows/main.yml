@@ -1,26 +1,26 @@
-name: 'Publish'
+name: 'Main'
 
 on:
   push:
-    branches: ['publish']
+    branches: ['*']
+  pull_request:
+    branches: ['*']
   workflow_dispatch:
 
 jobs:
 
-  publish:
-    name: 'Node.js ${{matrix.node_version}} on ${{matrix.os}}'
-    runs-on: '${{matrix.os}}'
-    strategy:
-      matrix:
-        os: ['ubuntu-latest']
-        node_version: ['16']
+  build:
+    name: 'Build'
+    runs-on: 'ubuntu-latest'
+    env:
+      NODE_VERSION: 'lts/*'
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@v3'
-      - name: 'Use Node.js ${{matrix.node_version}}'
+      - name: 'Use Node.js ${{ env.NODE_VERSION }}'
         uses: 'actions/setup-node@v3'
         with:
-          node-version: '${{matrix.node_version}}'
+          node-version: '${{ env.NODE_VERSION }}'
           cache: 'npm'
       - name: 'Install'
         run: 'npm ci'
@@ -29,6 +29,7 @@ jobs:
       - name: 'Build'
         run: 'npm run build'
       - name: 'Publish'
+        if: "github.ref == 'refs/heads/publish'"
         run: |
           branch='dist'; dir='./dist/'; commit='no'
           git config user.name 'hectorm-bot'
