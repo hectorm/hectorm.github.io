@@ -19,7 +19,7 @@
       <h-button
         class="button pointer"
         text="Docker"
-        link="https://hub.docker.com/u/hectormolinero"
+        link="https://hub.docker.com/u/hectorm"
         :icon="faDocker"
       />
       <h-button
