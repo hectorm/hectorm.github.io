@@ -40,6 +40,8 @@ jobs:
 
   publish:
     name: 'Publish'
+    if: "github.ref == 'refs/heads/publish'"
+    needs: ['build']
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'write'
@@ -52,7 +54,6 @@ jobs:
           name: 'dist'
           path: './dist/'
       - name: 'Publish'
-        if: "github.ref == 'refs/heads/publish'"
         run: |
           branch='dist'; dir='./dist/'; commit='no'
           git config user.name 'hectorm-bot'
