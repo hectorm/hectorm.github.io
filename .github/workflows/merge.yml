@@ -1,24 +1,33 @@
-name: 'Publish'
+name: 'Merge'
 
 on:
   workflow_dispatch:
+    inputs:
+      from:
+        description: 'From'
+        required: true
+        default: 'master'
+      to:
+        description: 'To'
+        required: true
+        default: 'publish'
 
 jobs:
 
-  publish:
-    name: 'Publish'
+  merge:
+    name: 'Merge'
     runs-on: 'ubuntu-latest'
     permissions:
       contents: 'write'
     env:
-      FROM: 'master'
-      TO: 'publish'
+      FROM: '${{ github.event.inputs.from }}'
+      TO: '${{ github.event.inputs.to }}'
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@v3'
         with:
           ref: '${{ env.TO }}'
-      - name: 'Publish'
+      - name: 'Merge'
         run: |
           git fetch origin "${FROM:?}:${FROM:?}"
           git merge --no-edit "${FROM:?}"
