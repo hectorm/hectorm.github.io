@@ -1,0 +1,25 @@
+name: 'Publish'
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  publish:
+    name: 'Publish'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'write'
+    env:
+      FROM: 'master'
+      TO: 'publish'
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v3'
+        with:
+          ref: '${{ env.TO }}'
+      - name: 'Publish'
+        run: |
+          git fetch origin "${FROM:?}:${FROM:?}"
+          git merge --no-edit "${FROM:?}"
+          git push origin HEAD
