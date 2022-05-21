@@ -38,8 +38,8 @@ jobs:
           path: './dist/'
           retention-days: 1
 
-  publish:
-    name: 'Publish'
+  publish-git:
+    name: 'Git publish'
     if: "github.ref == 'refs/heads/publish'"
     needs: ['build']
     runs-on: 'ubuntu-latest'
@@ -74,3 +74,26 @@ jobs:
             git --work-tree "${dir:?}" commit -m "Deploy $(date -Iseconds)"
             git push origin "${branch:?}"
           fi
+
+  publish-cloudflare-pages:
+    name: 'Cloudflare Pages publish'
+    if: "github.ref == 'refs/heads/publish'"
+    needs: ['build']
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+      deployments: 'write'
+    steps:
+      - name: 'Download artifacts'
+        uses: 'actions/download-artifact@v3'
+        with:
+          name: 'dist'
+          path: './dist/'
+      - name: 'Publish'
+        uses: 'cloudflare/pages-action@1'
+        with:
+          accountId: '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}'
+          apiToken: '${{ secrets.CLOUDFLARE_API_TOKEN }}'
+          gitHubToken: '${{ secrets.GITHUB_TOKEN }}'
+          projectName: 'hectorm'
+          directory: './dist/'
