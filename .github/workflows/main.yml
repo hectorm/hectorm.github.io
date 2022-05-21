@@ -7,6 +7,8 @@ on:
     branches: ['*', '!dist']
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
 
   build:
