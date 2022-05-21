@@ -2,9 +2,9 @@ name: 'Main'
 
 on:
   push:
-    branches: ['*']
+    branches: ['*', '!dist']
   pull_request:
-    branches: ['*']
+    branches: ['*', '!dist']
   workflow_dispatch:
 
 jobs:
