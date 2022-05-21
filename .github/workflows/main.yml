@@ -18,9 +18,9 @@ jobs:
       NODE_VERSION: 'lts/*'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28'
       - name: 'Use Node.js ${{ env.NODE_VERSION }}'
-        uses: 'actions/setup-node@v3'
+        uses: 'actions/setup-node@17f8bd926464a1afa4c6a11669539e9c1ba77048'
         with:
           node-version: '${{ env.NODE_VERSION }}'
           cache: 'npm'
@@ -32,7 +32,7 @@ jobs:
         run: 'npm run build'
       - name: 'Upload artifacts'
         if: "github.ref == 'refs/heads/publish'"
-        uses: 'actions/upload-artifact@v3'
+        uses: 'actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8'
         with:
           name: 'dist'
           path: './dist/'
@@ -47,9 +47,9 @@ jobs:
       contents: 'write'
     steps:
       - name: 'Checkout'
-        uses: 'actions/checkout@v3'
+        uses: 'actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28'
       - name: 'Download artifacts'
-        uses: 'actions/download-artifact@v3'
+        uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
         with:
           name: 'dist'
           path: './dist/'
@@ -85,12 +85,12 @@ jobs:
       deployments: 'write'
     steps:
       - name: 'Download artifacts'
-        uses: 'actions/download-artifact@v3'
+        uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
         with:
           name: 'dist'
           path: './dist/'
       - name: 'Publish'
-        uses: 'cloudflare/pages-action@1'
+        uses: 'cloudflare/pages-action@241979f53bf462fedfe0d8cec4239f14d786965a'
         with:
           accountId: '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}'
           apiToken: '${{ secrets.CLOUDFLARE_API_TOKEN }}'
