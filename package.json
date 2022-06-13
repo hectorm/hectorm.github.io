@@ -16,7 +16,7 @@
     "@fortawesome/free-regular-svg-icons": "~6.1.1",
     "@fortawesome/free-solid-svg-icons": "~6.1.1",
     "vue": "~3.2.37",
-    "vue-fa": "~3.1.1"
+    "vue-fa": "~4.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "~2.3.3",
