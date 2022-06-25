@@ -1,3 +1,40 @@
+<script setup>
+import { computed } from "vue";
+
+import Fa from "vue-fa";
+
+const props = defineProps({
+  text: { type: String, default: "" },
+  link: { type: String, default: "" },
+  icon: { type: Object, default: undefined },
+  isObfuscated: { type: Boolean, default: false },
+});
+
+const href = computed(() => {
+  let href = props.link;
+
+  if (props.isObfuscated) {
+    // Super-secure quantum-based data encryption algorithm!!1!!111
+    href = href.replace(/[a-z]/gi, (s) => {
+      return String.fromCharCode(
+        s.charCodeAt(0) + (s.toLowerCase() < "n" ? 13 : -13)
+      );
+    });
+  }
+
+  // Convert relative path to absolute.
+  const anchor = document.createElement("a");
+  anchor.href = href;
+  href = anchor.href;
+
+  return href;
+});
+
+const prettyHref = computed(() => {
+  return href.value.replace(/^\w+:(?:\/\/)?/, "");
+});
+</script>
+
 <template>
   <a class="button" :href="href">
     <fa class="icon" :icon="icon" />
@@ -7,47 +44,6 @@
     </div>
   </a>
 </template>
-
-<script>
-import Fa from "vue-fa";
-
-export default {
-  name: "HButton",
-  components: {
-    Fa,
-  },
-  props: {
-    text: { type: String, default: "" },
-    link: { type: String, default: "" },
-    icon: { type: Object, default: undefined },
-    isObfuscated: { type: Boolean, default: false },
-  },
-  computed: {
-    href() {
-      let href = this.link;
-
-      if (this.isObfuscated) {
-        // Super-secure quantum-based data encryption algorithm!!1!!111
-        href = href.replace(/[a-z]/gi, (s) => {
-          return String.fromCharCode(
-            s.charCodeAt(0) + (s.toLowerCase() < "n" ? 13 : -13)
-          );
-        });
-      }
-
-      // Convert relative path to absolute.
-      const anchor = document.createElement("a");
-      anchor.href = href;
-      href = anchor.href;
-
-      return href;
-    },
-    prettyHref() {
-      return this.href.replace(/^\w+:(?:\/\/)?/, "");
-    },
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import "~/common/scss/utilities/all";

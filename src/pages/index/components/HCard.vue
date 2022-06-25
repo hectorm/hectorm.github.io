@@ -1,3 +1,15 @@
+<script setup>
+import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDocker,
+  faGithub,
+  faGitlab,
+} from "@fortawesome/free-brands-svg-icons";
+
+import HButton from "./HButton.vue";
+import HLogo from "./HLogo.vue";
+</script>
+
 <template>
   <div class="card">
     <h-logo class="logo" />
@@ -44,37 +56,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
-
-import {
-  faDocker,
-  faGithub,
-  faGitlab,
-} from "@fortawesome/free-brands-svg-icons";
-
-import HButton from "./HButton.vue";
-import HLogo from "./HLogo.vue";
-
-export default {
-  name: "HCard",
-  components: {
-    HButton,
-    HLogo,
-  },
-  setup() {
-    return {
-      faDocker,
-      faEnvelope,
-      faGithub,
-      faGitlab,
-      faHeart,
-      faKey,
-    };
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import "~/common/scss/utilities/all";

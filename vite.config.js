@@ -1,7 +1,8 @@
-import { defineConfig } from "vite";
 import { fileURLToPath } from "url";
 import glob from "glob";
 import path from "path";
+
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -19,7 +20,6 @@ export default defineConfig({
   build: {
     outDir: path.join(dirname, "dist/"),
     emptyOutDir: true,
-    brotliSize: false,
     rollupOptions: {
       input: glob.sync(path.join(dirname, "src/*.html")),
     },

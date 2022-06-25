@@ -1,43 +1,43 @@
 <!-- Based on https://github.com/pakastin/nodegarden -->
 
-<template>
-  <div
-    ref="container"
-    class="node-garden"
-    @click="onClick"
-    @mousemove="onMousemove"
-    @mouseleave="onMouseleave"
-  >
-    <canvas ref="canvas" />
-  </div>
-</template>
+<script setup>
+import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
 
-<script>
-import { markRaw } from "vue";
+const container = ref(null);
 
-const defaultTo = (value, defaultValue) => {
-  return typeof value === "undefined" ? defaultValue : value;
+const canvas = document.createElement("canvas");
+let ctx = null;
+
+const nodes = [];
+const nodesMax = 200;
+const nodesColors = {
+  node: { r: 0xe5, g: 0xe9, b: 0xf0 },
+  repel: { r: 0x5e, g: 0x81, b: 0xac },
+  attract: { r: 0xbf, g: 0x61, b: 0x6a },
 };
 
-export class Node {
-  constructor(garden) {
-    this.garden = garden;
+let mounted = false;
+
+class Node {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
     this.reset();
   }
 
   render() {
-    this.garden.ctx.beginPath();
-    this.garden.ctx.arc(this.x, this.y, this.getDiameter(), 0, 2 * Math.PI);
-    this.garden.ctx.fill();
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, this.getDiameter(), 0, 2 * Math.PI);
+    this.ctx.fill();
   }
 
   update() {
     this.x += this.vx;
     this.y += this.vy;
     if (
-      this.x > this.garden.width + 50 ||
+      this.x > this.canvas.width + 50 ||
       this.x < -50 ||
-      this.y > this.garden.height + 50 ||
+      this.y > this.canvas.height + 50 ||
       this.y < -50
     ) {
       // If node over screen limits - reset to a init position.
@@ -46,8 +46,8 @@ export class Node {
   }
 
   reset({ x, y, vx, vy, m, c } = {}) {
-    this.x = defaultTo(x, Math.random() * this.garden.width);
-    this.y = defaultTo(y, Math.random() * this.garden.height);
+    this.x = defaultTo(x, Math.random() * this.canvas.width);
+    this.y = defaultTo(y, Math.random() * this.canvas.height);
     this.vx = defaultTo(vx, Math.random() * 0.5 - 0.25);
     this.vy = defaultTo(vy, Math.random() * 0.5 - 0.25);
     this.m = defaultTo(m, Math.random() * 3 + 0.5);
@@ -88,168 +88,159 @@ export class Node {
   }
 }
 
-export default {
-  name: "NodeGarden",
-  data() {
-    return markRaw({
-      mounted: false,
-      width: 0,
-      height: 0,
-      ctx: null,
-      nodes: null,
-      mouseNode: null,
-      maxNodes: 200,
-      colors: {
-        node: { r: 0xe5, g: 0xe9, b: 0xf0 },
-        repel: { r: 0x5e, g: 0x81, b: 0xac },
-        attract: { r: 0xbf, g: 0x61, b: 0x6a },
-      },
-    });
-  },
-  mounted() {
-    this.$nextTick(function () {
-      this.mounted = true;
-
-      this.ctx = this.$refs.canvas.getContext("2d");
-      this.nodes = [];
-
-      // Add mouse node.
-      this.mouseNode = new Node(this);
-      this.mouseNode.update = () => {};
-      this.mouseNode.reset = () => {};
-      this.mouseNode.render = () => {};
-      this.mouseNode.m = 15;
-      this.mouseNode.c = 1;
-      // Move coordinates to unreachable zone.
-      this.mouseNode.x = Number.MAX_SAFE_INTEGER;
-      this.mouseNode.y = Number.MAX_SAFE_INTEGER;
-      this.nodes.unshift(this.mouseNode);
-
-      setTimeout(() => {
-        this.resize();
-        this.render();
-      }, 10);
-
-      window.addEventListener("resize", this.resize);
-    });
-  },
-  beforeUnmount() {
-    this.mounted = false;
-    window.removeEventListener("resize", this.resize);
-  },
-  methods: {
-    render() {
-      if (!this.mounted) {
-        return;
-      }
-
-      // Clear canvas.
-      this.ctx.clearRect(0, 0, this.width, this.height);
-
-      // Update links.
-      for (let i = 0; i < this.nodes.length - 1; i++) {
-        const a = this.nodes[i];
-
-        for (let j = i + 1; j < this.nodes.length; j++) {
-          const b = this.nodes[j];
-
-          const attract = a.c !== b.c;
-
-          // Collision: remove smaller or equal, never both of them.
-          const squaredDistance = a.squaredDistanceTo(b);
-          if (attract && squaredDistance <= (a.m / 2 + b.m / 2) ** 2) {
-            if (a.m <= b.m) {
-              a.collideTo(b);
-            } else {
-              b.collideTo(a);
-            }
-            continue;
-          }
-
-          // Calculate gravity force.
-          const force = (2 * (a.m * b.m)) / squaredDistance;
-          const distance = a.distanceTo(b);
-          const direction = {
-            x: distance.x / distance.total,
-            y: distance.y / distance.total,
-          };
-          a.addForce((attract ? 1 : -1) * force, direction);
-          b.addForce((attract ? 1 : -1) * -force, direction);
-
-          // Draw gravity lines
-          const opacity = force * 100;
-          if (opacity >= 0.025) {
-            let color;
-            if (attract) {
-              color = this.colors.attract;
-            } else {
-              color = this.colors.repel;
-            }
-            this.ctx.beginPath();
-            this.ctx.strokeStyle = `rgba(
-              ${color.r},
-              ${color.g},
-              ${color.b},
-              ${opacity}
-            )`;
-            this.ctx.moveTo(a.x, a.y);
-            this.ctx.lineTo(b.x, b.y);
-            this.ctx.stroke();
-          }
-        }
-      }
-
-      // Render and update nodes.
-      for (let i = 0; i < this.nodes.length; i++) {
-        this.nodes[i].render();
-        this.nodes[i].update();
-      }
-
-      requestAnimationFrame(this.render);
-    },
-    resize() {
-      // If retina screen, scale canvas.
-      if (window.devicePixelRatio !== 1) {
-        this.$refs.canvas.style.transformOrigin = "0 0";
-        this.$refs.canvas.style.transform = `scale(
-          ${1 / window.devicePixelRatio}
-        )`;
-      }
-
-      this.width = this.$refs.container.offsetWidth * window.devicePixelRatio;
-      this.height = this.$refs.container.offsetHeight * window.devicePixelRatio;
-      this.area = this.width * this.height;
-
-      // Calculate nodes needed.
-      this.nodes.length = (Math.sqrt(this.area) / 10) | 0;
-      if (this.nodes.length > this.maxNodes) {
-        this.nodes.length = this.maxNodes;
-      }
-
-      // Set canvas size.
-      this.$refs.canvas.width = this.width;
-      this.$refs.canvas.height = this.height;
-
-      const color = this.colors.node;
-      this.ctx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
-
-      // Create nodes.
-      for (let i = 0; i < this.nodes.length; i++) {
-        if (this.nodes[i]) continue;
-        this.nodes[i] = new Node(this);
-      }
-    },
-    onClick() {
-      this.mouseNode.c *= -1;
-    },
-    onMousemove(event) {
-      this.mouseNode.x = event.pageX * window.devicePixelRatio;
-      this.mouseNode.y = event.pageY * window.devicePixelRatio;
-    },
-    onMouseleave() {
-      this.mouseNode.x = Number.MAX_SAFE_INTEGER;
-      this.mouseNode.y = Number.MAX_SAFE_INTEGER;
-    },
-  },
+const defaultTo = (value, defaultValue) => {
+  return typeof value === "undefined" ? defaultValue : value;
 };
+
+const render = () => {
+  if (!mounted) {
+    return;
+  }
+
+  // Clear canvas.
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Update links.
+  for (let i = 0; i < nodes.length - 1; i++) {
+    const a = nodes[i];
+
+    for (let j = i + 1; j < nodes.length; j++) {
+      const b = nodes[j];
+
+      const attract = a.c !== b.c;
+
+      // Collision: remove smaller or equal, never both of them.
+      const squaredDistance = a.squaredDistanceTo(b);
+      if (attract && squaredDistance <= (a.m / 2 + b.m / 2) ** 2) {
+        if (a.m <= b.m) {
+          a.collideTo(b);
+        } else {
+          b.collideTo(a);
+        }
+        continue;
+      }
+
+      // Calculate gravity force.
+      const force = (2 * (a.m * b.m)) / squaredDistance;
+      const distance = a.distanceTo(b);
+      const direction = {
+        x: distance.x / distance.total,
+        y: distance.y / distance.total,
+      };
+      a.addForce((attract ? 1 : -1) * force, direction);
+      b.addForce((attract ? 1 : -1) * -force, direction);
+
+      // Draw gravity lines
+      const opacity = force * 100;
+      if (opacity >= 0.025) {
+        let color;
+        if (attract) {
+          color = nodesColors.attract;
+        } else {
+          color = nodesColors.repel;
+        }
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${opacity})`;
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Render and update nodes.
+  for (let i = 0; i < nodes.length; i++) {
+    nodes[i].render();
+    nodes[i].update();
+  }
+
+  requestAnimationFrame(render);
+};
+
+const resize = () => {
+  // If retina screen, scale canvas.
+  if (window.devicePixelRatio !== 1) {
+    canvas.style.transformOrigin = "0 0";
+    canvas.style.transform = `scale(${1 / window.devicePixelRatio})`;
+  }
+
+  const width = container.value.offsetWidth * window.devicePixelRatio;
+  const height = container.value.offsetHeight * window.devicePixelRatio;
+  const area = width * height;
+
+  // Calculate nodes needed.
+  nodes.length = Math.min((Math.sqrt(area) / 10) | 0, nodesMax);
+
+  // Set canvas size.
+  canvas.width = width;
+  canvas.height = height;
+
+  const color = nodesColors.node;
+  ctx.fillStyle = `rgb(${color.r},${color.g},${color.b})`;
+
+  // Create nodes.
+  for (let i = 0; i < nodes.length; i++) {
+    if (nodes[i]) continue;
+    nodes[i] = new Node(canvas);
+  }
+};
+
+const onClick = () => {
+  nodes[0].c *= -1;
+};
+
+const onMousemove = (event) => {
+  nodes[0].x = event.pageX * window.devicePixelRatio;
+  nodes[0].y = event.pageY * window.devicePixelRatio;
+};
+
+const onMouseleave = () => {
+  nodes[0].x = Number.MAX_SAFE_INTEGER;
+  nodes[0].y = Number.MAX_SAFE_INTEGER;
+};
+
+onMounted(() => {
+  nextTick(() => {
+    mounted = true;
+
+    container.value.append(canvas);
+    ctx = canvas.getContext("2d");
+
+    // Add mouse node.
+    const mouseNode = new Node(canvas);
+    mouseNode.update = () => {};
+    mouseNode.reset = () => {};
+    mouseNode.render = () => {};
+    mouseNode.m = 15;
+    mouseNode.c = 1;
+    // Move coordinates to unreachable zone.
+    mouseNode.x = Number.MAX_SAFE_INTEGER;
+    mouseNode.y = Number.MAX_SAFE_INTEGER;
+
+    nodes.length = 0;
+    nodes.push(mouseNode);
+
+    setTimeout(() => {
+      resize();
+      render();
+    }, 10);
+
+    window.addEventListener("resize", resize);
+  });
+});
+
+onBeforeUnmount(() => {
+  mounted = false;
+  window.removeEventListener("resize", resize);
+});
 </script>
+
+<template>
+  <div
+    ref="container"
+    class="node-garden"
+    @click="onClick"
+    @mousemove="onMousemove"
+    @mouseleave="onMouseleave"
+  ></div>
+</template>

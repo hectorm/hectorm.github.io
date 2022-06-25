@@ -1,20 +1,12 @@
+<script setup>
+import NodeGarden from "~/common/components/NodeGarden.vue";
+import HCard from "./components/HCard.vue";
+</script>
+
 <template>
   <h-card class="card" />
   <node-garden class="node-garden" />
 </template>
-
-<script>
-import NodeGarden from "~/common/components/NodeGarden.vue";
-import HCard from "./components/HCard.vue";
-
-export default {
-  name: "App",
-  components: {
-    NodeGarden,
-    HCard,
-  },
-};
-</script>
 
 <style lang="scss">
 @import "./scss/main.scss";

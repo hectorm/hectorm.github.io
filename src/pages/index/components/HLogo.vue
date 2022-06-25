@@ -74,12 +74,6 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: "HLogo",
-};
-</script>
-
 <style scoped lang="scss">
 @import "~/common/scss/utilities/all";
 

@@ -1,3 +1,77 @@
+<script setup>
+import { ref } from "vue";
+
+import Fa from "vue-fa";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+
+import stripeConf from "./assets/stripe/live.json";
+import paypalConf from "./assets/paypal.json";
+
+const form = ref(null);
+const stripe = ref(Stripe(stripeConf.publishableKey));
+const paypalId = ref(paypalConf.id);
+const amount = ref(10);
+const currency = ref("USD");
+const currencies = ref({
+  AUD: { symbol: "$" },
+  CAD: { symbol: "$" },
+  CHF: { symbol: "Fr." },
+  CZK: { symbol: "Kč" },
+  DKK: { symbol: "kr" },
+  EUR: { symbol: "€" },
+  GBP: { symbol: "£" },
+  HKD: { symbol: "$" },
+  HUF: { symbol: "Ft" },
+  ILS: { symbol: "₪" },
+  JPY: { symbol: "¥" },
+  MXN: { symbol: "$" },
+  NOK: { symbol: "kr" },
+  NZD: { symbol: "$" },
+  PLN: { symbol: "zł" },
+  RUB: { symbol: "₽" },
+  SEK: { symbol: "kr" },
+  SGD: { symbol: "$" },
+  TRY: { symbol: "TL" },
+  USD: { symbol: "$" },
+});
+const errorMessage = ref("");
+
+const onDonateWithStripe = async () => {
+  try {
+    const isValidForm = form.value.checkValidity();
+    if (!isValidForm) return;
+
+    const price = stripeConf.skuIds[currency.value];
+    const quantity = amount.value;
+    await stripe.value.redirectToCheckout({
+      mode: "payment",
+      submitType: "donate",
+      lineItems: [{ price, quantity }],
+      successUrl: window.location.origin,
+      cancelUrl: window.location.href,
+    });
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+};
+
+const onDonateWithPayPal = async () => {
+  try {
+    const isValidForm = form.value.checkValidity();
+    if (!isValidForm) return;
+
+    window.location.href =
+      "https://www.paypal.com/donate/?cmd=_donations" +
+      `&business=${paypalId.value}` +
+      `&amount=${encodeURIComponent(amount.value)}` +
+      `&currency_code=${encodeURIComponent(currency.value)}` +
+      "&no_note=0";
+  } catch (error) {
+    errorMessage.value = error.message;
+  }
+};
+</script>
+
 <template>
   <form ref="form" class="form" @submit.prevent>
     <h1 class="form-title">
@@ -22,12 +96,8 @@
         class="form-element form-element-currency"
         aria-label="Currency"
       >
-        <option
-          v-for="({ symbol }, name) in currencies"
-          :key="name"
-          :value="name"
-        >
-          {{ name }}&nbsp;&nbsp;&nbsp;{{ symbol }}
+        <option v-for="(v, k) in currencies" :key="k" :value="k">
+          {{ k }}&nbsp;&nbsp;&nbsp;{{ v.symbol }}
         </option>
       </select>
       <input
@@ -63,98 +133,6 @@
     </p>
   </form>
 </template>
-
-<script>
-import Fa from "vue-fa";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-
-import stripeKeys from "./assets/stripe/live.json";
-
-export default {
-  name: "App",
-  components: {
-    Fa,
-  },
-  setup() {
-    return {
-      faHeart,
-    };
-  },
-  data() {
-    return {
-      stripe: null,
-      paypalId: "HZ5SP6EEMXXYE",
-      amount: 10,
-      currency: "USD",
-      currencies: {
-        AUD: { symbol: "$" },
-        CAD: { symbol: "$" },
-        CHF: { symbol: "Fr." },
-        CZK: { symbol: "Kč" },
-        DKK: { symbol: "kr" },
-        EUR: { symbol: "€" },
-        GBP: { symbol: "£" },
-        HKD: { symbol: "$" },
-        HUF: { symbol: "Ft" },
-        ILS: { symbol: "₪" },
-        JPY: { symbol: "¥" },
-        MXN: { symbol: "$" },
-        NOK: { symbol: "kr" },
-        NZD: { symbol: "$" },
-        PLN: { symbol: "zł" },
-        RUB: { symbol: "₽" },
-        SEK: { symbol: "kr" },
-        SGD: { symbol: "$" },
-        TRY: { symbol: "TL" },
-        USD: { symbol: "$" },
-      },
-      errorMessage: "",
-    };
-  },
-  async created() {
-    try {
-      this.stripe = Stripe(stripeKeys.publishableKey);
-    } catch (error) {
-      this.errorMessage = error.message;
-    }
-  },
-  methods: {
-    async onDonateWithStripe() {
-      try {
-        const isValidForm = this.$refs.form.checkValidity();
-        if (!isValidForm) return;
-
-        const price = stripeKeys.skuIds[this.currency];
-        const quantity = this.amount;
-        await this.stripe.redirectToCheckout({
-          mode: "payment",
-          submitType: "donate",
-          lineItems: [{ price, quantity }],
-          successUrl: window.location.origin,
-          cancelUrl: window.location.href,
-        });
-      } catch (error) {
-        this.errorMessage = error.message;
-      }
-    },
-    async onDonateWithPayPal() {
-      try {
-        const isValidForm = this.$refs.form.checkValidity();
-        if (!isValidForm) return;
-
-        window.location.href =
-          "https://www.paypal.com/donate/?cmd=_donations" +
-          `&business=${this.paypalId}` +
-          `&amount=${encodeURIComponent(this.amount)}` +
-          `&currency_code=${encodeURIComponent(this.currency)}` +
-          "&no_note=0";
-      } catch (error) {
-        this.errorMessage = error.message;
-      }
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 @import "./scss/main.scss";
@@ -236,6 +214,7 @@ body {
         text-align: right;
         border-radius: 0 rem(3) rem(3) 0;
         appearance: textfield;
+
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           appearance: none;
