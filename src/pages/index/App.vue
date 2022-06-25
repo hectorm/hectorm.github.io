@@ -22,9 +22,6 @@ export default {
 body {
   margin: 0;
   height: 100vh;
-  font-family: $system-sans-serif;
-  font-size: $em-base-px;
-  font-weight: 400;
   color: map-get($theme-colors, "light");
   background-color: map-get($theme-colors, "dark");
 }

@@ -1,6 +1,9 @@
 @import "./utilities/all";
 
 html {
+  font-family: $system-sans-serif;
+  font-size: $em-base-px;
+  font-weight: 400;
   box-sizing: border-box;
 }
 
