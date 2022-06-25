@@ -5,6 +5,7 @@
   "author": "Héctor Molinero Fernández <hector@molinero.dev>",
   "license": "MIT",
   "homepage": "https://hector.molinero.dev",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

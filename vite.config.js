@@ -1,24 +1,27 @@
 import { defineConfig } from "vite";
+import { fileURLToPath } from "url";
 import glob from "glob";
 import path from "path";
 import vue from "@vitejs/plugin-vue";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "~/": path.join(__dirname, "src/"),
+      "~/": path.join(dirname, "src/"),
     },
   },
-  root: path.join(__dirname, "src/"),
+  root: path.join(dirname, "src/"),
   base: "./",
-  publicDir: path.join(__dirname, "public/"),
+  publicDir: path.join(dirname, "public/"),
   build: {
-    outDir: path.join(__dirname, "dist/"),
+    outDir: path.join(dirname, "dist/"),
     emptyOutDir: true,
     brotliSize: false,
     rollupOptions: {
-      input: glob.sync(path.join(__dirname, "src/*.html")),
+      input: glob.sync(path.join(dirname, "src/*.html")),
     },
   },
 });
