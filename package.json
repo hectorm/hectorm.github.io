@@ -7,10 +7,10 @@
   "homepage": "https://hector.molinero.dev",
   "type": "module",
   "scripts": {
+    "lint": "eslint --ext .js,.cjs,.vue ./",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "lint": "eslint --ext .js,.vue ./"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "~6.1.1",
