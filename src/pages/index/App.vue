@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~/common/scss/utilities/all";
+@import "./scss/main.scss";
 
 body {
   margin: 0;
