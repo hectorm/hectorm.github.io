@@ -2,9 +2,9 @@ name: 'CodeQL'
 
 on:
   push:
-    branches: ['*', '!dist']
+    branches: ['*']
   pull_request:
-    branches: ['*', '!dist']
+    branches: ['*']
   schedule:
     - cron: '25 10 * * 3'
   workflow_dispatch:
