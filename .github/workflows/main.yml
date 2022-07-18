@@ -40,43 +40,6 @@ jobs:
           path: './dist/'
           retention-days: 1
 
-  publish-git:
-    name: 'Git publish'
-    if: "github.ref == 'refs/heads/publish'"
-    needs: ['build']
-    runs-on: 'ubuntu-latest'
-    permissions:
-      contents: 'write'
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28'
-      - name: 'Download artifacts'
-        uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
-        with:
-          name: 'dist'
-          path: './dist/'
-      - name: 'Publish'
-        run: |
-          branch='dist'; dir='./dist/'; commit='no'
-          git config user.name 'hectorm-bot'
-          git config user.email 'noreply@molinero.dev'
-          if git ls-remote --exit-code origin refs/heads/"${branch:?}"; then
-            git fetch --force origin "${branch:?}":"${branch:?}"
-            git symbolic-ref HEAD refs/heads/"${branch:?}"
-            git --work-tree "${dir:?}" reset --mixed
-            git --work-tree "${dir:?}" add --all
-            ret='0'; git --work-tree "${dir:?}" diff --exit-code HEAD -- || ret="$?"
-            if [ "${ret:?}" = '1' ]; then commit='yes'; fi
-          else
-            git --work-tree "${dir:?}" checkout --orphan "${branch:?}"
-            git --work-tree "${dir:?}" add --all
-            commit='yes'
-          fi
-          if [ "${commit:?}" = 'yes' ]; then
-            git --work-tree "${dir:?}" commit -m "Deploy $(date -Iseconds)"
-            git push origin "${branch:?}"
-          fi
-
   publish-cloudflare-pages:
     name: 'Cloudflare Pages publish'
     if: "github.ref == 'refs/heads/publish'"
@@ -99,3 +62,40 @@ jobs:
           gitHubToken: '${{ secrets.GITHUB_TOKEN }}'
           projectName: 'hectorm'
           directory: './dist/'
+
+# publish-git:
+#   name: 'Git publish'
+#   if: "github.ref == 'refs/heads/publish'"
+#   needs: ['build']
+#   runs-on: 'ubuntu-latest'
+#   permissions:
+#     contents: 'write'
+#   steps:
+#     - name: 'Checkout'
+#       uses: 'actions/checkout@d0651293c4a5a52e711f25b41b05b2212f385d28'
+#     - name: 'Download artifacts'
+#       uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
+#       with:
+#         name: 'dist'
+#         path: './dist/'
+#     - name: 'Publish'
+#       run: |
+#         branch='dist'; dir='./dist/'; commit='no'
+#         git config user.name 'hectorm-bot'
+#         git config user.email 'noreply@molinero.dev'
+#         if git ls-remote --exit-code origin refs/heads/"${branch:?}"; then
+#           git fetch --force origin "${branch:?}":"${branch:?}"
+#           git symbolic-ref HEAD refs/heads/"${branch:?}"
+#           git --work-tree "${dir:?}" reset --mixed
+#           git --work-tree "${dir:?}" add --all
+#           ret='0'; git --work-tree "${dir:?}" diff --exit-code HEAD -- || ret="$?"
+#           if [ "${ret:?}" = '1' ]; then commit='yes'; fi
+#         else
+#           git --work-tree "${dir:?}" checkout --orphan "${branch:?}"
+#           git --work-tree "${dir:?}" add --all
+#           commit='yes'
+#         fi
+#         if [ "${commit:?}" = 'yes' ]; then
+#           git --work-tree "${dir:?}" commit -m "Deploy $(date -Iseconds)"
+#           git push origin "${branch:?}"
+#         fi
