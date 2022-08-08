@@ -34,11 +34,25 @@ jobs:
         run: 'npm run build'
       - name: 'Upload artifacts'
         if: "github.ref == 'refs/heads/publish'"
-        uses: 'actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8'
+        uses: 'actions/upload-pages-artifact@ceec27c96bc4983b4e6c48bee599d67014b8db2e'
         with:
-          name: 'dist'
           path: './dist/'
           retention-days: 1
+
+  publish-github-pages:
+    name: 'GitHub Pages publish'
+    if: "github.ref == 'refs/heads/publish'"
+    needs: ['build']
+    runs-on: 'ubuntu-latest'
+    permissions:
+      id-token: 'write'
+      pages: 'write'
+    environment:
+      name: 'github-pages'
+      url: '${{ steps.deployment.outputs.page_url }}'
+    steps:
+      - name: 'Publish'
+        uses: 'actions/deploy-pages@eaaccf9fc5bdd22d4a09b60d72b4c2dd07d8ad37'
 
   publish-cloudflare-pages:
     name: 'Cloudflare Pages publish'
@@ -46,14 +60,15 @@ jobs:
     needs: ['build']
     runs-on: 'ubuntu-latest'
     permissions:
-      contents: 'read'
       deployments: 'write'
     steps:
       - name: 'Download artifacts'
         uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
         with:
-          name: 'dist'
-          path: './dist/'
+          name: 'github-pages'
+          path: './artifact.tar'
+      - name: 'Extract artifacts'
+        run: 'mkdir ./dist/ && tar -xvf ./artifact.tar -C ./dist/'
       - name: 'Publish'
         uses: 'cloudflare/pages-action@241979f53bf462fedfe0d8cec4239f14d786965a'
         with:
