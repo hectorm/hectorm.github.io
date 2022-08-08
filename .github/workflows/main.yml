@@ -52,6 +52,7 @@ jobs:
       url: '${{ steps.deployment.outputs.page_url }}'
     steps:
       - name: 'Publish'
+        id: 'deployment'
         uses: 'actions/deploy-pages@eaaccf9fc5bdd22d4a09b60d72b4c2dd07d8ad37'
 
   publish-cloudflare-pages:
