@@ -66,9 +66,9 @@ jobs:
         uses: 'actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741'
         with:
           name: 'github-pages'
-          path: './artifact.tar'
+          path: './dist/'
       - name: 'Extract artifacts'
-        run: 'mkdir ./dist/ && tar -xvf ./artifact.tar -C ./dist/'
+        run: 'tar -xvf ./dist/artifact.tar -C ./dist/ && rm -f ./dist/artifact.tar'
       - name: 'Publish'
         uses: 'cloudflare/pages-action@241979f53bf462fedfe0d8cec4239f14d786965a'
         with:
