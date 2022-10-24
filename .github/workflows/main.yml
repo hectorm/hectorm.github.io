@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: 'Publish'
         id: 'deployment'
-        uses: 'actions/deploy-pages@75c1124b142c363849aac2d23c005a4faf87c90f'
+        uses: 'actions/deploy-pages@69a62cdfa4c32e0d925268597986261876cac577'
 
   publish-cloudflare-pages:
     name: 'Cloudflare Pages publish'
