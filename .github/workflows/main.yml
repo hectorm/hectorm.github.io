@@ -34,7 +34,7 @@ jobs:
         run: 'npm run build'
       - name: 'Upload artifacts'
         if: "github.ref == 'refs/heads/publish'"
-        uses: 'actions/upload-pages-artifact@4506126207ed04f7c31e67d0b20154fc373f2505'
+        uses: 'actions/upload-pages-artifact@c8641e80048cf33d329c39df3bcc53196178335a'
         with:
           path: './dist/'
           retention-days: 1
