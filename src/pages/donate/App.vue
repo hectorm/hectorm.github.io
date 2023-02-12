@@ -4,11 +4,11 @@ import { ref } from "vue";
 import Fa from "vue-fa";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import stripeConf from "./assets/stripe/live.json";
+// import stripeConf from "./assets/stripe/live.json";
 import paypalConf from "./assets/paypal.json";
 
 const form = ref(null);
-const stripe = ref(Stripe(stripeConf.publishableKey));
+// const stripe = ref(Stripe(stripeConf.publishableKey));
 const paypalId = ref(paypalConf.id);
 const amount = ref(10);
 const currency = ref("USD");
@@ -36,6 +36,7 @@ const currencies = ref({
 });
 const errorMessage = ref("");
 
+/*
 const onDonateWithStripe = async () => {
   try {
     const isValidForm = form.value.checkValidity();
@@ -54,6 +55,7 @@ const onDonateWithStripe = async () => {
     errorMessage.value = error.message;
   }
 };
+*/
 
 const onDonateWithPayPal = async () => {
   try {
@@ -86,8 +88,8 @@ const onDonateWithPayPal = async () => {
     </p>
     <p class="form-paragraph">
       Donations are securely processed through
-      <a href="https://stripe.com">Stripe</a> or
-      <a href="https://paypal.com">PayPal</a>, and your payment information is
+      <!--<a href="https://stripe.com">Stripe</a> or-->
+      <a href="https://paypal.com">PayPal</a> and your payment information is
       not stored on my servers.
     </p>
     <div class="form-controls">
@@ -109,6 +111,7 @@ const onDonateWithPayPal = async () => {
         placeholder="Amount"
         aria-label="Amount"
       />
+      <!--
       <button
         class="form-element form-element-donate"
         type="button"
@@ -118,6 +121,7 @@ const onDonateWithPayPal = async () => {
         <fa class="icon" :icon="faHeart" />
         <span class="text">Donate with Stripe</span>
       </button>
+      -->
       <button
         class="form-element form-element-donate"
         type="button"
