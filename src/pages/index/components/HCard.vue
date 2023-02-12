@@ -1,10 +1,6 @@
 <script setup>
 import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
-import {
-  faDocker,
-  faGithub,
-  faGitlab,
-} from "@fortawesome/free-brands-svg-icons";
+import { faDocker, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import HButton from "./HButton.vue";
 import HLogo from "./HLogo.vue";
@@ -21,12 +17,6 @@ import HLogo from "./HLogo.vue";
         text="GitHub"
         link="https://github.com/hectorm"
         :icon="faGithub"
-      />
-      <h-button
-        class="button pointer"
-        text="GitLab"
-        link="https://gitlab.com/hectorm"
-        :icon="faGitlab"
       />
       <h-button
         class="button pointer"

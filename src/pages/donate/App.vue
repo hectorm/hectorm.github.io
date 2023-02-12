@@ -81,10 +81,9 @@ const onDonateWithPayPal = async () => {
       <a href="./">Héctor Molinero Fernández</a>
     </h1>
     <p class="form-paragraph">
-      Thanks for your interest in supporting my work! Your donation here
-      supports my open source projects on
-      <a href="https://github.com/hectorm">GitHub</a> and
-      <a href="https://gitlab.com/hectorm">GitLab</a>.
+      Thank you for your interest in supporting my work! Your donation here
+      will support my open source projects on
+      <a href="https://github.com/hectorm">GitHub</a>.
     </p>
     <p class="form-paragraph">
       Donations are securely processed through
