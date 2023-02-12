@@ -2,18 +2,16 @@
 import { ref } from "vue";
 
 import Fa from "vue-fa";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faPaypal, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-// import stripeConf from "./assets/stripe/live.json";
-import paypalConf from "./assets/paypal.json";
+import { fetchRates } from "./utils/fetch-rates.js";
 
 const form = ref(null);
-// const stripe = ref(Stripe(stripeConf.publishableKey));
-const paypalId = ref(paypalConf.id);
 const amount = ref(10);
 const currency = ref("USD");
 const currencies = ref({
   AUD: { symbol: "$" },
+  BRL: { symbol: "R$" },
   CAD: { symbol: "$" },
   CHF: { symbol: "Fr." },
   CZK: { symbol: "Kč" },
@@ -27,47 +25,45 @@ const currencies = ref({
   MXN: { symbol: "$" },
   NOK: { symbol: "kr" },
   NZD: { symbol: "$" },
+  PHP: { symbol: "₱" },
   PLN: { symbol: "zł" },
   RUB: { symbol: "₽" },
   SEK: { symbol: "kr" },
   SGD: { symbol: "$" },
-  TRY: { symbol: "TL" },
+  THB: { symbol: "฿" },
+  TWD: { symbol: "NT$" },
   USD: { symbol: "$" },
 });
 const errorMessage = ref("");
 
-/*
-const onDonateWithStripe = async () => {
+const onDonateWithPayPal = async () => {
   try {
-    const isValidForm = form.value.checkValidity();
-    if (!isValidForm) return;
+    if (!form.value.reportValidity()) return;
 
-    const price = stripeConf.skuIds[currency.value];
-    const quantity = amount.value;
-    await stripe.value.redirectToCheckout({
-      mode: "payment",
-      submitType: "donate",
-      lineItems: [{ price, quantity }],
-      successUrl: window.location.origin,
-      cancelUrl: window.location.href,
-    });
+    const url = new URL("https://www.paypal.com/donate/");
+    url.searchParams.set("cmd", "_donations");
+    url.searchParams.set("business", "HZ5SP6EEMXXYE");
+    url.searchParams.set("amount", amount.value);
+    url.searchParams.set("currency_code", currency.value);
+
+    window.location.href = url.href;
   } catch (error) {
     errorMessage.value = error.message;
   }
 };
-*/
 
-const onDonateWithPayPal = async () => {
+const onDonateWithGitHub = async () => {
   try {
-    const isValidForm = form.value.checkValidity();
-    if (!isValidForm) return;
+    if (!form.value.reportValidity()) return;
 
-    window.location.href =
-      "https://www.paypal.com/donate/?cmd=_donations" +
-      `&business=${paypalId.value}` +
-      `&amount=${encodeURIComponent(amount.value)}` +
-      `&currency_code=${encodeURIComponent(currency.value)}` +
-      "&no_note=0";
+    const rates = await fetchRates();
+    const amountUsd = (amount.value / rates.get(currency.value)) | 0;
+
+    const url = new URL("https://github.com/sponsors/hectorm");
+    url.searchParams.set("frequency", "one-time");
+    url.searchParams.set("amount", amountUsd);
+
+    window.location.href = url.href;
   } catch (error) {
     errorMessage.value = error.message;
   }
@@ -81,14 +77,14 @@ const onDonateWithPayPal = async () => {
       <a href="./">Héctor Molinero Fernández</a>
     </h1>
     <p class="form-paragraph">
-      Thank you for your interest in supporting my work! Your donation here
-      will support my open source projects on
+      Thank you for your interest in supporting my work! Your donation here will
+      support my open source projects on
       <a href="https://github.com/hectorm">GitHub</a>.
     </p>
     <p class="form-paragraph">
       Donations are securely processed through
-      <!--<a href="https://stripe.com">Stripe</a> or-->
-      <a href="https://paypal.com">PayPal</a> and your payment information is
+      <a href="https://paypal.com">PayPal</a> or
+      <a href="https://github.com">GitHub</a> and your payment information is
       not stored on my servers.
     </p>
     <div class="form-controls">
@@ -109,26 +105,25 @@ const onDonateWithPayPal = async () => {
         min="1"
         placeholder="Amount"
         aria-label="Amount"
+        required
       />
-      <!--
-      <button
-        class="form-element form-element-donate"
-        type="button"
-        aria-label="Donate with Stripe"
-        @click="onDonateWithStripe"
-      >
-        <fa class="icon" :icon="faHeart" />
-        <span class="text">Donate with Stripe</span>
-      </button>
-      -->
       <button
         class="form-element form-element-donate"
         type="button"
         aria-label="Donate with PayPal"
         @click="onDonateWithPayPal"
       >
-        <fa class="icon" :icon="faHeart" />
+        <fa class="icon" :icon="faPaypal" />
         <span class="text">Donate with PayPal</span>
+      </button>
+      <button
+        class="form-element form-element-donate"
+        type="button"
+        aria-label="Donate with GitHub"
+        @click="onDonateWithGitHub"
+      >
+        <fa class="icon" :icon="faGithub" />
+        <span class="text">Donate with GitHub</span>
       </button>
     </div>
     <p v-if="errorMessage.length > 0" class="form-paragraph">
