@@ -16,7 +16,7 @@
     "@fortawesome/free-brands-svg-icons": "~6.4.0",
     "@fortawesome/free-regular-svg-icons": "~6.4.0",
     "@fortawesome/free-solid-svg-icons": "~6.4.0",
-    "vue": "~3.2.47",
+    "vue": "~3.3.2",
     "vue-fa": "~4.0.2"
   },
   "devDependencies": {
