@@ -71,7 +71,7 @@ jobs:
       - name: 'Extract artifacts'
         run: 'tar -xvf ./dist/artifact.tar -C ./dist/ && rm -f ./dist/artifact.tar'
       - name: 'Publish'
-        uses: 'cloudflare/pages-action@61eafe73baad0195ab582cb447b2c6e15a0df9ce'
+        uses: 'cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca'
         with:
           accountId: '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}'
           apiToken: '${{ secrets.CLOUDFLARE_API_TOKEN }}'
