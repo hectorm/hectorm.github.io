@@ -54,11 +54,11 @@ const prettyHref = computed(() => {
   align-items: center;
   justify-content: center;
 
-  margin: rem(8);
-  padding: rem(8) rem(15);
-  min-width: rem(120);
+  margin: toRem(8);
+  padding: toRem(8) toRem(15);
+  min-width: toRem(120);
 
-  font-size: rem(14);
+  font-size: toRem(14);
   font-weight: 400;
   text-align: center;
   text-decoration: none;
@@ -67,7 +67,7 @@ const prettyHref = computed(() => {
   background-color: map-get($theme-colors, "primary");
 
   border: 0;
-  border-radius: rem(3);
+  border-radius: toRem(3);
 
   @include shadow-elevation-2dp;
 
@@ -82,8 +82,8 @@ const prettyHref = computed(() => {
 
   .icon {
     flex-grow: 0;
-    width: rem(18);
-    margin-right: rem(10);
+    width: toRem(18);
+    margin-right: toRem(10);
   }
 
   .content {

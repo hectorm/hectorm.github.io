@@ -51,30 +51,30 @@ import HLogo from "./HLogo.vue";
 @import "~/common/scss/utilities/all";
 
 .card {
-  padding: rem(20);
+  padding: toRem(20);
   text-align: center;
-  text-shadow: rem(1) rem(1) rem(2) map-get($theme-colors, "dark");
+  text-shadow: toRem(1) toRem(1) toRem(2) map-get($theme-colors, "dark");
 
   .logo {
     width: 100%;
-    max-width: rem(256);
+    max-width: toRem(256);
   }
 
   .content {
     width: 100%;
-    max-width: rem(448);
+    max-width: toRem(448);
 
     .title {
-      margin: 0 0 rem(20);
+      margin: 0 0 toRem(20);
     }
 
     h1.title {
-      font-size: rem(30);
+      font-size: toRem(30);
       font-weight: 400;
     }
 
     h2.title {
-      font-size: rem(20);
+      font-size: toRem(20);
       font-weight: 300;
     }
 

@@ -3,10 +3,10 @@
 $em-base: 16 !default;
 $em-base-px: #{$em-base}px;
 
-@function em($pxval, $base: $em-base) {
+@function toEm($pxval, $base: $em-base) {
   @return math.div($pxval, $base) * 1em;
 }
 
-@function rem($pxval, $base: $em-base) {
+@function toRem($pxval, $base: $em-base) {
   @return math.div($pxval, $base) * 1rem;
 }

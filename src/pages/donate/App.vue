@@ -151,8 +151,8 @@ body {
   min-height: 100%;
 
   .form {
-    margin: rem(30);
-    max-width: rem(750);
+    margin: toRem(30);
+    max-width: toRem(750);
     z-index: 1;
 
     .form-title,
@@ -161,30 +161,30 @@ body {
     }
 
     .form-title {
-      margin-bottom: rem(30);
+      margin-bottom: toRem(30);
     }
 
     .form-paragraph {
-      margin-bottom: rem(20);
+      margin-bottom: toRem(20);
       text-align: justify;
     }
 
     .form-controls {
-      margin-bottom: rem(20);
+      margin-bottom: toRem(20);
       text-align: center;
     }
 
     .form-element {
-      margin: rem(10);
-      padding: rem(6) rem(12);
-      height: rem(40);
+      margin: toRem(10);
+      padding: toRem(6) toRem(12);
+      height: toRem(40);
       vertical-align: middle;
 
-      font-size: rem(16);
+      font-size: toRem(16);
       font-weight: 700;
 
       border: 0;
-      border-radius: rem(3);
+      border-radius: toRem(3);
 
       color: map-get($theme-colors, "primary");
       background-color: map-get($theme-colors, "light");
@@ -200,17 +200,17 @@ body {
 
       &.form-element-currency {
         margin-right: 0;
-        width: rem(115);
-        border-radius: rem(3) 0 0 rem(3);
+        width: toRem(115);
+        border-radius: toRem(3) 0 0 toRem(3);
         cursor: pointer;
         appearance: none;
       }
 
       &.form-element-amount {
         margin-left: 0;
-        width: rem(115);
+        width: toRem(115);
         text-align: right;
-        border-radius: 0 rem(3) rem(3) 0;
+        border-radius: 0 toRem(3) toRem(3) 0;
         appearance: textfield;
 
         &::-webkit-outer-spin-button,
@@ -220,7 +220,7 @@ body {
       }
 
       &.form-element-donate {
-        width: rem(230);
+        width: toRem(230);
         cursor: pointer;
         appearance: none;
       }
@@ -228,10 +228,10 @@ body {
   }
 
   .icon {
-    width: rem(18);
+    width: toRem(18);
 
     & + .text {
-      margin-left: rem(10);
+      margin-left: toRem(10);
     }
   }
 }
