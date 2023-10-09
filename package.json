@@ -20,7 +20,7 @@
     "vue-fa": "~4.0.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "~4.3.4",
+    "@vitejs/plugin-vue": "~4.4.0",
     "eslint": "~8.51.0",
     "eslint-config-prettier": "~9.0.0",
     "eslint-plugin-prettier": "~5.0.0",
