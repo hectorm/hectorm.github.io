@@ -16,17 +16,17 @@
     "@fortawesome/free-brands-svg-icons": "~6.5.1",
     "@fortawesome/free-regular-svg-icons": "~6.5.1",
     "@fortawesome/free-solid-svg-icons": "~6.5.1",
-    "vue": "~3.3.9",
+    "vue": "~3.3.10",
     "vue-fa": "~4.0.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "~4.5.1",
+    "@vitejs/plugin-vue": "~4.5.2",
     "eslint": "~8.55.0",
     "eslint-config-prettier": "~9.1.0",
     "eslint-plugin-prettier": "~5.0.1",
     "eslint-plugin-vue": "~9.19.2",
     "prettier": "~3.1.0",
     "sass": "~1.69.5",
-    "vite": "~5.0.5"
+    "vite": "~5.0.6"
   }
 }
