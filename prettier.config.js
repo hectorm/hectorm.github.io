@@ -1,0 +1,21 @@
+export default {
+  plugins: ["@ianvs/prettier-plugin-sort-imports"],
+  printWidth: 120,
+  importOrder: [
+    "<TYPES>^(node|bun|deno):",
+    "<BUILT_IN_MODULES>",
+    "",
+    "<TYPES>",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "<TYPES>^(@fortawesome/|vue-fa$)",
+    "^(@fortawesome/|vue-fa$)",
+    "",
+    "<TYPES>^[~]/",
+    "^[~]/",
+    "",
+    "<TYPES>^[.]/",
+    "^[.]/",
+  ],
+  importOrderTypeScriptVersion: "5.0.0",
+};
