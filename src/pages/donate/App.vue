@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 
+import { faGithub, faPaypal } from "@fortawesome/free-brands-svg-icons";
 import Fa from "vue-fa";
-import { faPaypal, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import { fetchRates } from "./utils/fetch-rates.js";
 
@@ -77,25 +77,17 @@ const onDonateWithGitHub = async () => {
       <a href="./">Héctor Molinero Fernández</a>
     </h1>
     <p class="form-paragraph">
-      Thank you for your interest in supporting my work! Your donation here will
-      support my open source projects on
+      Thank you for your interest in supporting my work! Your donation here will support my open source projects on
       <a href="https://github.com/hectorm">GitHub</a>.
     </p>
     <p class="form-paragraph">
       Donations are securely processed through
-      <a href="https://paypal.com">PayPal</a> or
-      <a href="https://github.com">GitHub</a> and your payment information is
+      <a href="https://paypal.com">PayPal</a> or <a href="https://github.com">GitHub</a> and your payment information is
       not stored on my servers.
     </p>
     <div class="form-controls">
-      <select
-        v-model="currency"
-        class="form-element form-element-currency"
-        aria-label="Currency"
-      >
-        <option v-for="(v, k) in currencies" :key="k" :value="k">
-          {{ k }}&nbsp;&nbsp;&nbsp;{{ v.symbol }}
-        </option>
+      <select v-model="currency" class="form-element form-element-currency" aria-label="Currency">
+        <option v-for="(v, k) in currencies" :key="k" :value="k">{{ k }}&nbsp;&nbsp;&nbsp;{{ v.symbol }}</option>
       </select>
       <input
         v-model.number="amount"
@@ -126,9 +118,7 @@ const onDonateWithGitHub = async () => {
         <span class="text">Donate with GitHub</span>
       </button>
     </div>
-    <p v-if="errorMessage.length > 0" class="form-paragraph">
-      <strong>Error:</strong> {{ errorMessage }}
-    </p>
+    <p v-if="errorMessage.length > 0" class="form-paragraph"><strong>Error:</strong> {{ errorMessage }}</p>
   </form>
 </template>
 

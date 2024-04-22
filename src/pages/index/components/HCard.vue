@@ -1,6 +1,6 @@
 <script setup>
-import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
 import { faDocker, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faHeart, faKey } from "@fortawesome/free-solid-svg-icons";
 
 import HButton from "./HButton.vue";
 import HLogo from "./HLogo.vue";
@@ -10,39 +10,13 @@ import HLogo from "./HLogo.vue";
   <div class="card">
     <h-logo class="logo" />
     <div class="content">
-      <h1 class="title pointer">Héctor Molinero Fernández</h1>
-      <h2 class="title pointer">Software developer and system administrator</h2>
-      <h-button
-        class="button pointer"
-        text="GitHub"
-        link="https://github.com/hectorm"
-        :icon="faGithub"
-      />
-      <h-button
-        class="button pointer"
-        text="Docker"
-        link="https://hub.docker.com/u/hectorm"
-        :icon="faDocker"
-      />
-      <h-button
-        class="button pointer"
-        text="Email"
-        link="znvygb:urpgbe@zbyvareb.qri"
-        :icon="faEnvelope"
-        :is-obfuscated="true"
-      />
-      <h-button
-        class="button pointer"
-        text="PGP"
-        link="./key.asc"
-        :icon="faKey"
-      />
-      <h-button
-        class="button pointer"
-        text="Donate"
-        link="./donate.html"
-        :icon="faHeart"
-      />
+      <h1 class="title">Héctor Molinero Fernández</h1>
+      <h2 class="title">Software developer and system administrator</h2>
+      <h-button class="button" text="GitHub" link="https://github.com/hectorm" :icon="faGithub" />
+      <h-button class="button" text="Docker" link="https://hub.docker.com/u/hectorm" :icon="faDocker" />
+      <h-button class="button" text="Email" link="znvygb:urpgbe@zbyvareb.qri" :icon="faEnvelope" :obfuscated="true" />
+      <h-button class="button" text="PGP" link="./key.asc" :icon="faKey" />
+      <h-button class="button" text="Donate" link="./donate.html" :icon="faHeart" />
     </div>
   </div>
 </template>
@@ -54,6 +28,7 @@ import HLogo from "./HLogo.vue";
   padding: toRem(20);
   text-align: center;
   text-shadow: toRem(1) toRem(1) toRem(2) map-get($theme-colors, "dark");
+  pointer-events: none;
 
   .logo {
     width: 100%;
@@ -66,6 +41,7 @@ import HLogo from "./HLogo.vue";
 
     .title {
       margin: 0 0 toRem(20);
+      pointer-events: auto;
     }
 
     h1.title {
@@ -80,13 +56,8 @@ import HLogo from "./HLogo.vue";
 
     .button {
       text-shadow: none;
+      pointer-events: auto;
     }
-  }
-
-  pointer-events: none;
-
-  .pointer {
-    pointer-events: auto;
   }
 }
 </style>

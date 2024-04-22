@@ -1,7 +1,7 @@
 <!-- Based on https://github.com/pakastin/nodegarden -->
 
 <script setup>
-import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 const container = ref(null);
 
@@ -34,12 +34,7 @@ class Node {
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    if (
-      this.x > this.canvas.width + 50 ||
-      this.x < -50 ||
-      this.y > this.canvas.height + 50 ||
-      this.y < -50
-    ) {
+    if (this.x > this.canvas.width + 50 || this.x < -50 || this.y > this.canvas.height + 50 || this.y < -50) {
       // If node over screen limits - reset to a init position.
       this.reset();
     }
@@ -67,19 +62,12 @@ class Node {
   }
 
   squaredDistanceTo(node) {
-    return (
-      (node.x - this.x) * (node.x - this.x) +
-      (node.y - this.y) * (node.y - this.y)
-    );
+    return (node.x - this.x) * (node.x - this.x) + (node.y - this.y) * (node.y - this.y);
   }
 
   collideTo(node) {
-    node.vx =
-      (node.m * node.vx) / (this.m + node.m) +
-      (this.m * this.vx) / (this.m + node.m);
-    node.vy =
-      (node.m * node.vy) / (this.m + node.m) +
-      (this.m * this.vy) / (this.m + node.m);
+    node.vx = (node.m * node.vx) / (this.m + node.m) + (this.m * this.vx) / (this.m + node.m);
+    node.vy = (node.m * node.vy) / (this.m + node.m) + (this.m * this.vy) / (this.m + node.m);
     this.reset();
   }
 
@@ -236,11 +224,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div
-    ref="container"
-    class="node-garden"
-    @click="onClick"
-    @mousemove="onMousemove"
-    @mouseleave="onMouseleave"
-  ></div>
+  <div ref="container" class="node-garden" @click="onClick" @mousemove="onMousemove" @mouseleave="onMouseleave"></div>
 </template>

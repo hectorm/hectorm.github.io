@@ -7,18 +7,16 @@ const props = defineProps({
   text: { type: String, default: "" },
   link: { type: String, default: "" },
   icon: { type: Object, default: undefined },
-  isObfuscated: { type: Boolean, default: false },
+  obfuscated: { type: Boolean, default: false },
 });
 
 const href = computed(() => {
   let href = props.link;
 
-  if (props.isObfuscated) {
+  if (props.obfuscated) {
     // Super-secure quantum-based data encryption algorithm!!1!!111
     href = href.replace(/[a-z]/gi, (s) => {
-      return String.fromCharCode(
-        s.charCodeAt(0) + (s.toLowerCase() < "n" ? 13 : -13),
-      );
+      return String.fromCharCode(s.charCodeAt(0) + (s.toLowerCase() < "n" ? 13 : -13));
     });
   }
 

@@ -1,37 +1,37 @@
-name: 'CodeQL'
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: "CodeQL"
 
 on:
   push:
-    branches: ['*']
+    branches: ["*"]
   pull_request:
-    branches: ['*']
+    branches: ["*"]
   schedule:
-    - cron: '25 10 * * 3'
+    - cron: "25 10 * * 3"
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
-
   analyze:
-    name: 'Analyze'
-    runs-on: 'ubuntu-latest'
+    name: "Analyze"
+    runs-on: "ubuntu-latest"
     permissions:
-      actions: 'read'
-      contents: 'read'
-      security-events: 'write'
+      actions: "read"
+      contents: "read"
+      security-events: "write"
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript']
+        language: ["javascript"]
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f'
-      - name: 'Initialize CodeQL'
-        uses: 'github/codeql-action/init@cdcdbb579706841c47f7063dda365e292e5cad7a'
+      - name: "Checkout"
+        uses: "actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f"
+      - name: "Initialize CodeQL"
+        uses: "github/codeql-action/init@cdcdbb579706841c47f7063dda365e292e5cad7a"
         with:
-          languages: '${{ matrix.language }}'
-      - name: 'Autobuild'
-        uses: 'github/codeql-action/autobuild@cdcdbb579706841c47f7063dda365e292e5cad7a'
-      - name: 'Perform CodeQL Analysis'
-        uses: 'github/codeql-action/analyze@cdcdbb579706841c47f7063dda365e292e5cad7a'
+          languages: "${{ matrix.language }}"
+      - name: "Autobuild"
+        uses: "github/codeql-action/autobuild@cdcdbb579706841c47f7063dda365e292e5cad7a"
+      - name: "Perform CodeQL Analysis"
+        uses: "github/codeql-action/analyze@cdcdbb579706841c47f7063dda365e292e5cad7a"

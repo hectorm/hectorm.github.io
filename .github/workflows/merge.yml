@@ -1,35 +1,35 @@
-name: 'Merge'
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: "Merge"
 
 on:
   workflow_dispatch:
     inputs:
       from:
-        description: 'From'
+        description: "From"
         required: true
-        default: 'master'
+        default: "master"
       to:
-        description: 'To'
+        description: "To"
         required: true
-        default: 'publish'
+        default: "publish"
 
 permissions: {}
 
 jobs:
-
   merge:
-    name: 'Merge'
-    runs-on: 'ubuntu-latest'
+    name: "Merge"
+    runs-on: "ubuntu-latest"
     permissions:
-      contents: 'write'
+      contents: "write"
     env:
-      FROM: '${{ github.event.inputs.from }}'
-      TO: '${{ github.event.inputs.to }}'
+      FROM: "${{ github.event.inputs.from }}"
+      TO: "${{ github.event.inputs.to }}"
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f'
+      - name: "Checkout"
+        uses: "actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f"
         with:
-          ref: '${{ env.TO }}'
-      - name: 'Merge'
+          ref: "${{ env.TO }}"
+      - name: "Merge"
         run: |
           git fetch origin "${FROM:?}:${FROM:?}"
           git merge --no-edit "${FROM:?}"

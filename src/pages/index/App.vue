@@ -1,5 +1,6 @@
 <script setup>
 import NodeGarden from "~/common/components/NodeGarden.vue";
+
 import HCard from "./components/HCard.vue";
 </script>
 

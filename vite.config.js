@@ -1,9 +1,9 @@
-import { fileURLToPath } from "url";
-import glob from "glob";
-import path from "path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import { glob } from "glob";
+import { defineConfig } from "vite";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
