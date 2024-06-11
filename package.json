@@ -31,10 +31,10 @@
     "eslint-config-prettier": "~9.1.0",
     "eslint-plugin-vue": "~9.26.0",
     "glob": "~10.4.1",
-    "globals": "~15.3.0",
+    "globals": "~15.4.0",
     "npm-run-all2": "~6.2.0",
-    "prettier": "~3.3.0",
+    "prettier": "~3.3.1",
     "sass": "~1.77.4",
-    "vite": "~5.2.12"
+    "vite": "~5.2.13"
   }
 }
