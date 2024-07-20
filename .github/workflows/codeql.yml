@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "CodeQL"
+name: "CodeQL analysis"
 
 on:
   push:
+    tags: ["*"]
     branches: ["*"]
   pull_request:
     branches: ["*"]
@@ -14,7 +15,7 @@ permissions: {}
 
 jobs:
   analyze:
-    name: "Analyze"
+    name: "CodeQL analysis (${{ matrix.language }})"
     runs-on: "ubuntu-latest"
     permissions:
       actions: "read"
