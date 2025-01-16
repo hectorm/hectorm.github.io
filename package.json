@@ -27,14 +27,14 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "~4.4.0",
     "@vitejs/plugin-vue": "~5.2.1",
-    "eslint": "~9.17.0",
+    "eslint": "~9.18.0",
     "eslint-config-prettier": "~9.1.0",
     "eslint-plugin-vue": "~9.32.0",
-    "glob": "~11.0.0",
+    "glob": "~11.0.1",
     "globals": "~15.14.0",
     "npm-run-all2": "~7.0.2",
     "prettier": "~3.4.2",
-    "sass": "~1.83.0",
-    "vite": "~6.0.5"
+    "sass": "~1.83.1",
+    "vite": "~6.0.7"
   }
 }
