@@ -10,13 +10,17 @@ import HCard from "./components/HCard.vue";
 </template>
 
 <style lang="scss">
-@import "./scss/main.scss";
+@use "sass:map";
+
+@use "~/common/scss/utilities/globals";
+
+@use "./scss/main";
 
 body {
   margin: 0;
   height: 100vh;
-  color: map-get($theme-colors, "light");
-  background-color: map-get($theme-colors, "dark");
+  color: map.get(globals.$theme-colors, "light");
+  background-color: map.get(globals.$theme-colors, "dark");
 }
 
 #app {

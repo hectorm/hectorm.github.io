@@ -44,7 +44,12 @@ const prettyHref = computed(() => {
 </template>
 
 <style scoped lang="scss">
-@import "~/common/scss/utilities/all";
+@use "sass:color";
+@use "sass:map";
+
+@use "~/common/scss/utilities/em";
+@use "~/common/scss/utilities/globals";
+@use "~/common/scss/utilities/shadows";
 
 .button {
   display: inline-flex;
@@ -52,36 +57,36 @@ const prettyHref = computed(() => {
   align-items: center;
   justify-content: center;
 
-  margin: toRem(8);
-  padding: toRem(8) toRem(15);
-  min-width: toRem(120);
+  margin: em.toRem(8);
+  padding: em.toRem(8) em.toRem(15);
+  min-width: em.toRem(120);
 
-  font-size: toRem(14);
+  font-size: em.toRem(14);
   font-weight: 400;
   text-align: center;
   text-decoration: none;
 
-  color: map-get($theme-colors, "light");
-  background-color: map-get($theme-colors, "primary");
+  color: map.get(globals.$theme-colors, "light");
+  background-color: map.get(globals.$theme-colors, "primary");
 
   border: 0;
-  border-radius: toRem(3);
+  border-radius: em.toRem(3);
 
-  @include shadow-elevation-2dp;
+  @include shadows.shadow-elevation-2dp;
 
   &:hover,
   &:focus {
-    background-color: darken(map-get($theme-colors, "primary"), 5%);
+    background-color: color.scale(map.get(globals.$theme-colors, "primary"), $lightness: -5%);
   }
 
   &:active {
-    background-color: darken(map-get($theme-colors, "primary"), 10%);
+    background-color: color.scale(map.get(globals.$theme-colors, "primary"), $lightness: -10%);
   }
 
   .icon {
     flex-grow: 0;
-    width: toRem(18);
-    margin-right: toRem(10);
+    width: em.toRem(18);
+    margin-right: em.toRem(10);
   }
 
   .content {

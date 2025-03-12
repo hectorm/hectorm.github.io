@@ -22,6 +22,13 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: glob.sync(path.join(dirname, "src/*.html")),
+      output: {
+        manualChunks: (id) => {
+          if (/\/node_modules\//.test(id)) {
+            return "vendor";
+          }
+        },
+      },
     },
   },
 });

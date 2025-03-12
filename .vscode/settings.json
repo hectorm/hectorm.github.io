@@ -4,6 +4,5 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": ["source.fixAll"]
   },
-  "eslint.validate": ["javascript", "typescript", "vue"],
-  "eslint.experimental.useFlatConfig": true
+  "eslint.validate": ["javascript", "typescript", "vue"]
 }

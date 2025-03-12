@@ -123,13 +123,19 @@ const onDonateWithGitHub = async () => {
 </template>
 
 <style lang="scss">
-@import "./scss/main.scss";
+@use "sass:color";
+@use "sass:map";
+
+@use "~/common/scss/utilities/em";
+@use "~/common/scss/utilities/globals";
+
+@use "./scss/main";
 
 body {
   margin: 0;
   height: 100vh;
-  color: map-get($theme-colors, "light");
-  background-color: map-get($theme-colors, "dark");
+  color: map.get(globals.$theme-colors, "light");
+  background-color: map.get(globals.$theme-colors, "dark");
 }
 
 #app {
@@ -141,8 +147,8 @@ body {
   min-height: 100%;
 
   .form {
-    margin: toRem(30);
-    max-width: toRem(750);
+    margin: em.toRem(30);
+    max-width: em.toRem(750);
     z-index: 1;
 
     .form-title,
@@ -151,56 +157,56 @@ body {
     }
 
     .form-title {
-      margin-bottom: toRem(30);
+      margin-bottom: em.toRem(30);
     }
 
     .form-paragraph {
-      margin-bottom: toRem(20);
+      margin-bottom: em.toRem(20);
       text-align: justify;
     }
 
     .form-controls {
-      margin-bottom: toRem(20);
+      margin-bottom: em.toRem(20);
       text-align: center;
     }
 
     .form-element {
-      margin: toRem(10);
-      padding: toRem(6) toRem(12);
-      height: toRem(40);
+      margin: em.toRem(10);
+      padding: em.toRem(6) em.toRem(12);
+      height: em.toRem(40);
       vertical-align: middle;
 
-      font-size: toRem(16);
+      font-size: em.toRem(16);
       font-weight: 700;
 
       border: 0;
-      border-radius: toRem(3);
+      border-radius: em.toRem(3);
 
-      color: map-get($theme-colors, "primary");
-      background-color: map-get($theme-colors, "light");
+      color: map.get(globals.$theme-colors, "primary");
+      background-color: map.get(globals.$theme-colors, "light");
 
       &:hover,
       &:focus {
-        background-color: darken(map-get($theme-colors, "light"), 5%);
+        background-color: color.scale(map.get(globals.$theme-colors, "light"), $lightness: -5%);
       }
 
       &:active {
-        background-color: darken(map-get($theme-colors, "light"), 10%);
+        background-color: color.scale(map.get(globals.$theme-colors, "light"), $lightness: -10%);
       }
 
       &.form-element-currency {
         margin-right: 0;
-        width: toRem(115);
-        border-radius: toRem(3) 0 0 toRem(3);
+        width: em.toRem(115);
+        border-radius: em.toRem(3) 0 0 em.toRem(3);
         cursor: pointer;
         appearance: none;
       }
 
       &.form-element-amount {
         margin-left: 0;
-        width: toRem(115);
+        width: em.toRem(115);
         text-align: right;
-        border-radius: 0 toRem(3) toRem(3) 0;
+        border-radius: 0 em.toRem(3) em.toRem(3) 0;
         appearance: textfield;
 
         &::-webkit-outer-spin-button,
@@ -210,7 +216,7 @@ body {
       }
 
       &.form-element-donate {
-        width: toRem(230);
+        width: em.toRem(230);
         cursor: pointer;
         appearance: none;
       }
@@ -218,10 +224,10 @@ body {
   }
 
   .icon {
-    width: toRem(18);
+    width: em.toRem(18);
 
     & + .text {
-      margin-left: toRem(10);
+      margin-left: em.toRem(10);
     }
   }
 }

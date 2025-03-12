@@ -1,0 +1,23 @@
+$theme-colors: (
+  "primary": #2f5973,
+  "light": #e5e9f0,
+  "dark": #202b38,
+);
+
+$grid-breakpoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+) !default;
+
+$system-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$system-sans-serif:
+  system-ui, "Aptos", "Segoe UI", "Roboto", "Source Sans Pro", "Noto Sans", "Liberation Sans", "DejaVu Sans", "Arial",
+  sans-serif, $system-emoji !default;
+$system-serif:
+  "Source Serif Pro", "Noto Serif", "Liberation Serif", "DejaVu Serif", "Georgia", serif, $system-emoji !default;
+$system-monospace:
+  ui-monospace, "Menlo", "Cascadia Mono", "Source Code Pro", "Noto Sans Mono", "Liberation Mono", "DejaVu Sans Mono",
+  "Droid Sans Mono", "Consolas", monospace, $system-emoji !default;

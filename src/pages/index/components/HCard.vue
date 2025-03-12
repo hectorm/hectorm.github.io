@@ -22,35 +22,38 @@ import HLogo from "./HLogo.vue";
 </template>
 
 <style scoped lang="scss">
-@import "~/common/scss/utilities/all";
+@use "sass:map";
+
+@use "~/common/scss/utilities/em";
+@use "~/common/scss/utilities/globals";
 
 .card {
-  padding: toRem(20);
+  padding: em.toRem(20);
   text-align: center;
-  text-shadow: toRem(1) toRem(1) toRem(2) map-get($theme-colors, "dark");
+  text-shadow: em.toRem(1) em.toRem(1) em.toRem(2) map.get(globals.$theme-colors, "dark");
   pointer-events: none;
 
   .logo {
     width: 100%;
-    max-width: toRem(256);
+    max-width: em.toRem(256);
   }
 
   .content {
     width: 100%;
-    max-width: toRem(448);
+    max-width: em.toRem(448);
 
     .title {
-      margin: 0 0 toRem(20);
+      margin: 0 0 em.toRem(20);
       pointer-events: auto;
     }
 
     h1.title {
-      font-size: toRem(30);
+      font-size: em.toRem(30);
       font-weight: 400;
     }
 
     h2.title {
-      font-size: toRem(20);
+      font-size: em.toRem(20);
       font-weight: 300;
     }
 

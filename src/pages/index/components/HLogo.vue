@@ -75,8 +75,6 @@
 </template>
 
 <style scoped lang="scss">
-@import "~/common/scss/utilities/all";
-
 @keyframes fadeIn {
   0% {
     opacity: 0;

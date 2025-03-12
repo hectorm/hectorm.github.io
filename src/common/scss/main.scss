@@ -1,8 +1,11 @@
-@import "./utilities/all";
+@use "sass:map";
+
+@use "utilities/em";
+@use "utilities/globals";
 
 html {
-  font-family: $system-sans-serif;
-  font-size: $em-base-px;
+  font-family: globals.$system-sans-serif;
+  font-size: em.$em-base-px;
   font-weight: 400;
   box-sizing: border-box;
 }
@@ -14,6 +17,6 @@ html {
 }
 
 a {
-  color: map-get($theme-colors, "light");
+  color: map.get(globals.$theme-colors, "light");
   text-decoration: underline;
 }
