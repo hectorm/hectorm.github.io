@@ -54,27 +54,3 @@ jobs:
       - name: "Publish"
         id: "deployment"
         uses: "actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e"
-
-  publish-cloudflare-pages:
-    name: "Cloudflare Pages publish"
-    if: "github.ref == 'refs/heads/publish'"
-    needs: ["build"]
-    runs-on: "ubuntu-latest"
-    permissions:
-      deployments: "write"
-    steps:
-      - name: "Download artifacts"
-        uses: "actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0"
-        with:
-          name: "github-pages"
-          path: "./dist/"
-      - name: "Extract artifacts"
-        run: "tar -xvf ./dist/artifact.tar -C ./dist/ && rm -f ./dist/artifact.tar"
-      - name: "Publish"
-        uses: "cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca"
-        with:
-          accountId: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
-          apiToken: "${{ secrets.CLOUDFLARE_API_TOKEN }}"
-          gitHubToken: "${{ secrets.GITHUB_TOKEN }}"
-          projectName: "hectorm"
-          directory: "./dist/"
